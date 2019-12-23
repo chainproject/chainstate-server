@@ -1,0 +1,221 @@
+syntax = "proto3";
+
+option go_package = "api";
+
+import "google/protobuf/timestamp.proto";
+
+message Signer {
+	// name of the signer, only used to identify signers in the context of the containing account
+	string name = 1;
+	// type of the signer, e.g. 'ed25519', 'ecdsa', 'sphinx'... Lookup liboqs for more types!
+	string type = 2;
+	// pubkey is the public key of the signer
+	bytes pubkey = 3;
+	// weight is the weight of a signature of this signer
+	uint64 weight = 4;
+}
+
+message Account {
+	// id of the account
+	string id = 1;
+	// description contains a short description of this account
+	string description = 2;
+	// set of signers for this account, indexed by name
+	map<string, Signer> signers = 3;
+	// threshold specifies how many signatures are required to successfully transmit a transaction
+	// if the sum of the weights of valid signatures is greater or equal than this, the TX will succeed
+	uint64 threshold = 4;
+	// balance contains the amount of native tokens assigned to this account
+	uint64 balance = 5;
+	// is_validator indicates if the account is working as a validator for the network
+	bool is_validator = 6;
+	// vote contains the id of the account for which this account is voting
+	string vote = 7;
+	// created_at tells you when this account has been created
+	google.protobuf.Timestamp created_at = 8;
+}
+
+// Transaction is used to update the distributed ledger state
+message Transaction {
+	// Type specifies all possible transaction types
+	enum Type {
+		GENESIS = 0;
+		CREATE_ACCOUNT = 1;
+		MERGE_ACCOUNT = 2;
+		SEND = 3;
+		SET_VALIDATOR_FLAG = 4;
+		VOTE_VALIDATOR = 5;
+		ADD_SIGNER = 6;
+		REMOVE_SIGNER = 7;
+		SET_THRESHOLD = 8;
+		SET_DATA = 9;
+		EXECUTE = 10;
+	}
+
+
+	// GenesisContent contains the initial state of the chain
+	message GenesisContent {
+		repeated Account accounts = 1;
+	}
+	// CreateAccountContent contains the info that is needed to create a new account
+	message CreateAccountContent {
+		Account account = 1;
+	}
+	// MergeAccountContent contains the id of the target account
+	message MergeAccountContent {
+		string target_account = 1;
+	}
+	// SendData contains the info needed to transfer tokens from one account to another
+	message SendData {
+		string target_account = 1;
+		uint64 send_amount = 2;
+	}
+	// SetValidatorFlagContent will contain additional properties when seting the validator flag of an account
+	message SetValidatorFlagContent {
+		bool is_validator = 1;
+	}
+	// VoteValidatorContent contains the id of the target validator
+	message VoteValidatorContent {
+		string target_account = 1;
+	}
+	// AddSignerContent contains the new signer
+	message AddSignerContent {
+		Signer signer = 1;
+	}
+	// RemoveSignerContent contains the name of the signer to be removed
+	message RemoveSignerContent {
+		string name = 1;
+	}
+	// SetThresholdContent contains the new threshold for the target account
+	message SetThresholdContent {
+		uint64 threshold = 2;
+	}
+	// SetDataContent contains a key/value pair used to update an account scoped value
+	message SetDataContent {
+		string key = 1;
+		bytes data = 2;
+	}
+	// ExecuteContent contains the infos needed to execute a smart contract on the chain
+	message ExecuteContent {
+		// Type is a enum of all valid smart contract runtimes
+		enum Type {
+			JS = 0;
+			WASM = 1;
+		}
+		// account of the smart contract
+		string account = 1;
+		// key under which the contract can be found on the account
+		string key = 2;
+		// type specifies which runtime should be used
+		Type type = 3;
+		// entrypoint specifies the toplevel function to call in the specified contract
+		string entrypoint = 4;
+		// args are supplied to the smart contract
+		map<string,string> args = 5;
+		// compensation contains the amount of native tokens used to pay the smart contract
+		uint64 compensation = 6;
+	}
+
+	// These are the actual fields of a transaction
+	// id is a unique identifier for the transaction
+	string id = 1;
+	// type specifies what kind of transaction this is
+	Type type = 2;
+	// source_account is the address of the source account of this transaction
+	string source_account = 3;
+	// created_at tells you, you already guess it, when this tx has been created
+	google.protobuf.Timestamp created_at = 4;
+	// signatures contains the signatures for this transaction indexed by name of the signer
+	map<string,bytes> signatures = 5;
+	// fees contains the amount of native tokens used to pay for this transaction
+	uint64 fees = 6;
+
+	// content contains the type specific payload for the transaction
+	oneof content {
+		CreateAccountContent create_account_content = 7;
+		MergeAccountContent merge_account_content = 8;
+		SendData send_content = 9;
+		SetValidatorFlagContent set_validator_flag_content = 10;
+		VoteValidatorContent vote_validator_content = 11;
+		AddSignerContent add_signer_content = 12;
+		RemoveSignerContent remove_signer_content = 13;
+		SetThresholdContent set_threshold_content = 14;
+		SetDataContent set_data_content = 15;
+		ExecuteContent execute_content = 16;
+		GenesisContent genesis_content = 17;
+	}
+}
+
+// Transactions service response types
+message VerifyResponse {
+	bool valid = 1;
+	string reason = 2;
+}
+message ApplyResponse {
+	bool valid = 1;
+	string reason = 2;
+}
+
+// Accounts service request/response types
+message GetAccountRequest {
+	string name = 1;
+}
+message GetDataRequest {
+	string name = 1;
+	string key = 2;
+}
+message GetDataResponse {
+	string key = 1;
+	bytes data = 2;
+}
+message ListDataRequest {
+	string name = 1;
+	string prefix = 2;
+}
+
+// Validators service request/response types
+message ListValidatorsRequest {
+	uint64 top_n = 1;
+}
+message Validator {
+	string id = 1;
+	uint64 stake = 2;
+}
+message ListValidatorsResponse {
+	repeated Validator validators = 1;
+}
+message GetValidatorsRequest {
+	uint64 top_n = 1;
+	uint64 block = 2;
+}
+message GetValidatorsResponse {
+	Validator validator = 1;
+	repeated Validator witnesses = 2;
+}
+
+// Transactions is a service to provide the functionality of verifying and applying transactions
+service Transactions {
+	// Verify checks if all needed signatures are in place + all prerequirements are fullfilled for this TX to be executed
+	// This includes existence and balance checks.
+	rpc Verify(Transaction) returns (VerifyResponse);
+	// Apply applies a transaction against the current ledger state
+	rpc Apply(Transaction) returns (ApplyResponse);
+}
+
+// Accounts provides read access to account data on the ledger
+service Accounts {
+	// Get returns a single account
+	rpc Get(GetAccountRequest) returns (Account);
+	// GetData returns a single data object
+	rpc GetData(GetDataRequest) returns (GetDataResponse);
+	// ListData returns a stream of data objects attached to the specified account
+	rpc ListData(ListDataRequest) returns (stream GetDataResponse);
+}
+
+// Validators provides read access to the validator data
+service Validators {
+	// List returns a sorted list of the top N validators
+	rpc List(ListValidatorsRequest) returns (ListValidatorsResponse);
+	// Get returns the validator and witnesses for a given block under the probalilities implied by the current state
+	rpc Get(GetValidatorsRequest) returns (GetValidatorsResponse);
+}
