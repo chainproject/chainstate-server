@@ -25,7 +25,7 @@ func GetByName(name string) (SignatureAlgorithm, error) {
 	return algorithm, nil
 }
 
-var registry map[string]SignatureAlgorithm
+var registry = make(map[string]SignatureAlgorithm)
 
 func register(name string, algorithm SignatureAlgorithm) SignatureAlgorithm {
 	registry[name] = algorithm

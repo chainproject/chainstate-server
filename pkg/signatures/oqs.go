@@ -10,8 +10,8 @@ import (
 	"golang.org/x/crypto/sha3"
 )
 
-func NewOQS(id string, hasher Hasher) SignatureAlgorithm {
-	return &oqsSignatureAlgorithm{id, hasher}
+func NewOQS(id string, h hasher) SignatureAlgorithm {
+	return &oqsSignatureAlgorithm{id, h}
 }
 
 type oqsSignatureAlgorithm struct {
