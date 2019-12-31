@@ -7,6 +7,7 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
+	"sort"
 )
 
 type SignatureAlgorithm interface {
@@ -43,6 +44,15 @@ var registry = make(map[string]SignatureAlgorithm)
 func register(name string, algorithm SignatureAlgorithm) SignatureAlgorithm {
 	registry[name] = algorithm
 	return algorithm
+}
+
+func ListAlgorithms() (res []string) {
+	res = make([]string, 0, len(registry))
+	for key := range registry {
+		res = append(res, key)
+	}
+	sort.Strings(res)
+	return res
 }
 
 func SaveKeyToFile(out string, signatureAlgorithmName string, content []byte) (err error) {
