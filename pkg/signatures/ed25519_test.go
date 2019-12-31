@@ -10,16 +10,7 @@ import (
 
 func TestED25519(t *testing.T) {
 	algorithms := []SignatureAlgorithm{
-		ED25519_SHA224,
-		ED25519_SHA256,
-		ED25519_SHA384,
-		ED25519_SHA512,
-		ED25519_SHA512_224,
-		ED25519_SHA512_256,
-		ED25519_SHA3_224,
-		ED25519_SHA3_256,
-		ED25519_SHA3_384,
-		ED25519_SHA3_512,
+		ED25519,
 	}
 	for _, alg := range algorithms {
 		priv, pub, err := alg.GenerateKey(rand.Reader)

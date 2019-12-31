@@ -3,12 +3,9 @@ package signatures
 import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
-	"crypto/sha256"
-	"crypto/sha512"
 	"crypto/x509"
 	"encoding/asn1"
 	"errors"
-	"hash"
 	"io"
 	"math/big"
 
@@ -16,43 +13,21 @@ import (
 )
 
 var (
-	ECDSA_P224_SHA224     = register("ECDSA_P224_SHA224", NewECDSA(elliptic.P224(), sha256.New224()))
-	ECDSA_P256_SHA224     = register("ECDSA_P256_SHA224", NewECDSA(elliptic.P256(), sha256.New224()))
-	ECDSA_P384_SHA224     = register("ECDSA_P384_SHA224", NewECDSA(elliptic.P384(), sha256.New224()))
-	ECDSA_P521_SHA224     = register("ECDSA_P521_SHA224", NewECDSA(elliptic.P521(), sha256.New224()))
-	ECDSA_P224_SHA256     = register("ECDSA_P224_SHA256", NewECDSA(elliptic.P224(), sha256.New()))
-	ECDSA_P256_SHA256     = register("ECDSA_P256_SHA256", NewECDSA(elliptic.P256(), sha256.New()))
-	ECDSA_P384_SHA256     = register("ECDSA_P384_SHA256", NewECDSA(elliptic.P384(), sha256.New()))
-	ECDSA_P521_SHA256     = register("ECDSA_P521_SHA256", NewECDSA(elliptic.P521(), sha256.New()))
-	ECDSA_P224_SHA384     = register("ECDSA_P224_SHA384", NewECDSA(elliptic.P224(), sha512.New384()))
-	ECDSA_P256_SHA384     = register("ECDSA_P256_SHA384", NewECDSA(elliptic.P256(), sha512.New384()))
-	ECDSA_P384_SHA384     = register("ECDSA_P384_SHA384", NewECDSA(elliptic.P384(), sha512.New384()))
-	ECDSA_P521_SHA384     = register("ECDSA_P521_SHA384", NewECDSA(elliptic.P521(), sha512.New384()))
-	ECDSA_P224_SHA512     = register("ECDSA_P224_SHA512", NewECDSA(elliptic.P224(), sha512.New()))
-	ECDSA_P256_SHA512     = register("ECDSA_P256_SHA512", NewECDSA(elliptic.P256(), sha512.New()))
-	ECDSA_P384_SHA512     = register("ECDSA_P384_SHA512", NewECDSA(elliptic.P384(), sha512.New()))
-	ECDSA_P521_SHA512     = register("ECDSA_P521_SHA512", NewECDSA(elliptic.P521(), sha512.New()))
-	ECDSA_P224_SHA512_224 = register("ECDSA_P224_SHA512_224", NewECDSA(elliptic.P224(), sha512.New512_224()))
-	ECDSA_P256_SHA512_224 = register("ECDSA_P256_SHA512_224", NewECDSA(elliptic.P256(), sha512.New512_224()))
-	ECDSA_P384_SHA512_224 = register("ECDSA_P384_SHA512_224", NewECDSA(elliptic.P384(), sha512.New512_224()))
-	ECDSA_P521_SHA512_224 = register("ECDSA_P521_SHA512_224", NewECDSA(elliptic.P521(), sha512.New512_224()))
-	ECDSA_P224_SHA512_256 = register("ECDSA_P224_SHA512_256", NewECDSA(elliptic.P224(), sha512.New512_256()))
-	ECDSA_P256_SHA512_256 = register("ECDSA_P256_SHA512_256", NewECDSA(elliptic.P256(), sha512.New512_256()))
-	ECDSA_P384_SHA512_256 = register("ECDSA_P384_SHA512_256", NewECDSA(elliptic.P384(), sha512.New512_256()))
-	ECDSA_P521_SHA512_256 = register("ECDSA_P521_SHA512_256", NewECDSA(elliptic.P521(), sha512.New512_256()))
-	ECDSA_P224_SHA3_224   = register("ECDSA_P224_SHA3_224", NewECDSA(elliptic.P224(), sha3.New224()))
-	ECDSA_P256_SHA3_256   = register("ECDSA_P256_SHA3_256", NewECDSA(elliptic.P256(), sha3.New256()))
-	ECDSA_P384_SHA3_384   = register("ECDSA_P384_SHA3_384", NewECDSA(elliptic.P384(), sha3.New384()))
-	ECDSA_P521_SHA3_512   = register("ECDSA_P521_SHA3_512", NewECDSA(elliptic.P521(), sha3.New512()))
+	ECDSA_P224 = register("ECDSA_P224", NewECDSA(elliptic.P224()))
+	ECDSA_P256 = register("ECDSA_P256", NewECDSA(elliptic.P256()))
+	ECDSA_P384 = register("ECDSA_P384", NewECDSA(elliptic.P384()))
+	ECDSA_P521 = register("ECDSA_P521", NewECDSA(elliptic.P521()))
 )
 
-func NewECDSA(curve elliptic.Curve, hasher hash.Hash) SignatureAlgorithm {
-	return &ecdsaSignatureAlgorithm{curve, hasher}
+func NewECDSA(curve elliptic.Curve) SignatureAlgorithm {
+	s := &ecdsaSignatureAlgorithm{baseSignatureAlgorithm{}, curve}
+	s.SetHasher(sha3.New256())
+	return s
 }
 
 type ecdsaSignatureAlgorithm struct {
-	curve  elliptic.Curve
-	hasher hash.Hash
+	baseSignatureAlgorithm
+	curve elliptic.Curve
 }
 
 func (s *ecdsaSignatureAlgorithm) GenerateKey(random io.Reader) (priv []byte, pub []byte, err error) {
@@ -77,12 +52,12 @@ func (s *ecdsaSignatureAlgorithm) Sign(data, random io.Reader, privateKey []byte
 	if err != nil {
 		return nil, err
 	}
-	s.hasher.Reset()
-	_, err = io.Copy(s.hasher, data)
+	s.Hasher.Reset()
+	_, err = io.Copy(s.Hasher, data)
 	if err != nil {
 		return nil, err
 	}
-	digest := s.hasher.Sum(nil)
+	digest := s.Hasher.Sum(nil)
 	sigR, sigS, err := ecdsa.Sign(random, priv, digest)
 	if err != nil {
 		return nil, err
@@ -109,12 +84,12 @@ func (s *ecdsaSignatureAlgorithm) Verify(data io.Reader, signature []byte, publi
 	if !ok {
 		return errors.New("invalid public key type")
 	}
-	s.hasher.Reset()
-	_, err = io.Copy(s.hasher, data)
+	s.Hasher.Reset()
+	_, err = io.Copy(s.Hasher, data)
 	if err != nil {
 		return err
 	}
-	digest := s.hasher.Sum(nil)
+	digest := s.Hasher.Sum(nil)
 	ok = ecdsa.Verify(pub, digest, sig.R, sig.S)
 	if !ok {
 		return errors.New("signature validation failed")
