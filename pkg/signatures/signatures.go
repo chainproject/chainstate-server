@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"os"
 	"sort"
+	"strings"
 )
 
 type SignatureAlgorithm interface {
@@ -89,6 +90,7 @@ func LoadKeyFromFile(file string) (keyData []byte, SignatureAlgorithmName string
 	if err != nil {
 		return nil, "", err
 	}
+	defer f.Close()
 	return LoadKey(f)
 }
 
@@ -101,5 +103,6 @@ func LoadKey(in io.Reader) (keyData []byte, SignatureAlgorithmName string, err e
 	if block == nil {
 		return nil, "", errors.New("failed to decode PEM data")
 	}
-	return block.Bytes, block.Type, nil
+	parts := strings.Split(block.Type, " ")
+	return block.Bytes, parts[0], nil
 }
