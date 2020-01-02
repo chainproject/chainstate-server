@@ -13,8 +13,8 @@ import (
 	"github.com/spf13/pflag"
 	"google.golang.org/grpc"
 
-	"github.com/trusch/chainstate-server/pkg/api"
-	"github.com/trusch/chainstate-server/pkg/server"
+	"github.com/chainproject/chainstate-server/pkg/api"
+	"github.com/chainproject/chainstate-server/pkg/server"
 )
 
 var (
@@ -73,12 +73,12 @@ func main() {
 			if err != nil {
 				logrus.Fatal(err)
 			}
-			txServer, err := server.NewTransactionServer(ctx, db)
+			txServer, err := server.NewTransactionsServer(ctx, db, accountsServer)
 			if err != nil {
 				logrus.Fatal(err)
 			}
 			api.RegisterAccountsServer(srv, accountsServer)
-			api.RegisterTransactionsServer(srv, txServer, accountsServer)
+			api.RegisterTransactionsServer(srv, txServer)
 		},
 	})
 	if err != nil {

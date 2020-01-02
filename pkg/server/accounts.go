@@ -26,7 +26,8 @@ func NewAccountsServer(ctx context.Context, db *sql.DB) (AccountsServer, error) 
 	_, err = db.ExecContext(ctx, `CREATE TABLE IF NOT EXISTS account_signers(
 		account_id TEXT,
 		signer_id TEXT,
-		type TEXT,
+		signature_algorithm TEXT,
+		hash_algorithm TEXT,
 		weight INT,
 		pubkey BYTEA,
 		PRIMARY KEY(account_id, signer_id))`)
@@ -53,7 +54,7 @@ type AccountsServer interface {
 	// SetData sets data on an account
 	SetData(ctx context.Context, accountID, dataID string, data []byte) error
 	// AddSigner adds a signer to an account
-	AddSigner(ctx context.Context, accountID, signerID, signatureType string, weight int, pubkey []byte) error
+	AddSigner(ctx context.Context, accountID, signerID, signatureAlgorithm, hashAlgorithm string, weight int, pubkey []byte) error
 	// DelSigner removes a signer from an account
 	DelSigner(ctx context.Context, accountID, signerID string) error
 	// Send transfers tokens from one account to another
@@ -98,7 +99,7 @@ func (s *accountsServer) Get(ctx context.Context, req *api.GetAccountRequest) (*
 	if err != nil {
 		return nil, err
 	}
-	rows, err := s.getBuilder(s.db).Select("signer_id", "pubkey", "type", "weight").
+	rows, err := s.getBuilder(s.db).Select("signer_id", "pubkey", "signature_algorithm", "hash_algorithm", "weight").
 		Where(squirrel.Eq{"account_id": req.GetName()}).
 		QueryContext(ctx)
 	if err != nil {
@@ -107,7 +108,7 @@ func (s *accountsServer) Get(ctx context.Context, req *api.GetAccountRequest) (*
 	defer rows.Close()
 	for rows.Next() {
 		signer := &api.Signer{}
-		err = rows.Scan(&signer.Name, &signer.Pubkey, &signer.Type, &signer.Weight)
+		err = rows.Scan(&signer.Name, &signer.Pubkey, &signer.SignatureAlgorithm, &signer.HashAlgorithm, &signer.Weight)
 		if err != nil {
 			return nil, err
 		}
@@ -165,14 +166,16 @@ func (s *accountsServer) Create(ctx context.Context, req *api.Account) (resp *ap
 				"account_id",
 				"signer_id",
 				"pubkey",
-				"type",
+				"signature_algorithm",
+				"hash_algorithm",
 				"weight",
 			).
 			Values(
 				req.GetId(),
 				signer.GetName(),
 				signer.GetPubkey(),
-				signer.GetType(),
+				signer.GetSignatureAlgorithm(),
+				signer.GetHashAlgorithm(),
 				signer.GetWeight(),
 			).
 			ExecContext(ctx)
@@ -207,20 +210,22 @@ func (s *accountsServer) GetData(ctx context.Context, req *api.GetDataRequest) (
 }
 
 // AddSigner adds a signer to an account
-func (s *accountsServer) AddSigner(ctx context.Context, accountID, signerID, signatureType string, weight int, pubkey []byte) error {
+func (s *accountsServer) AddSigner(ctx context.Context, accountID, signerID, signatureAlgorithm, hashAlgorithm string, weight int, pubkey []byte) error {
 	_, err := s.getBuilder(s.db).Insert("account_signers").
 		Columns(
 			"account_id",
 			"signer_id",
 			"pubkey",
-			"type",
+			"signature_algorithm",
+			"hash_algorithm",
 			"weight",
 		).
 		Values(
 			accountID,
 			signerID,
 			pubkey,
-			signatureType,
+			signatureAlgorithm,
+			hashAlgorithm,
 			weight,
 		).
 		ExecContext(ctx)

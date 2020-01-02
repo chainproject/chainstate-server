@@ -12,11 +12,12 @@ import (
 	"github.com/chainproject/chainstate-server/pkg/signatures"
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/golang/protobuf/proto"
+	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
-func NewTransactionsServer(ctx context.Context, db *sql.DB, accountsServer api.AccountsServer) (api.TransactionServer, error) {
+func NewTransactionsServer(ctx context.Context, db *sql.DB, accountsServer AccountsServer) (api.TransactionsServer, error) {
 	return &transactionServer{db, accountsServer}, nil
 }
 
@@ -28,6 +29,7 @@ type transactionServer struct {
 // Verify checks if all needed signatures are in place + all prerequirements are fullfilled for this TX to be executed
 // This includes existence and balance checks.
 func (s *transactionServer) Verify(ctx context.Context, tx *api.Transaction) (resp *api.VerifyResponse, err error) {
+	logrus.Infof("verify tx %+v", tx)
 	switch tx.GetType() {
 	case api.Transaction_GENESIS:
 		err = s.verifyGenesis(ctx, tx)
@@ -53,12 +55,15 @@ func (s *transactionServer) Verify(ctx context.Context, tx *api.Transaction) (re
 		err = s.verifySignatures(ctx, tx)
 	default:
 		return nil, status.Error(codes.InvalidArgument, "unknown transaction type")
+	}
+	if err != nil {
+		return nil, err
 	}
 	return &api.VerifyResponse{}, nil
 }
 
 // Apply applies a transaction against the current ledger state
-func (s *transactionServer) Apply(ctx context.Context, tx *api.Transaction) (*api.ApplyResponse, error) {
+func (s *transactionServer) Apply(ctx context.Context, tx *api.Transaction) (resp *api.ApplyResponse, err error) {
 	switch tx.GetType() {
 	case api.Transaction_GENESIS:
 		err = s.verifyGenesis(ctx, tx)
@@ -85,11 +90,14 @@ func (s *transactionServer) Apply(ctx context.Context, tx *api.Transaction) (*ap
 	default:
 		return nil, status.Error(codes.InvalidArgument, "unknown transaction type")
 	}
+	if err != nil {
+		return nil, err
+	}
 	return &api.ApplyResponse{}, nil
 }
 
 func (s *transactionServer) verifyGenesis(ctx context.Context, tx *api.Transaction) error {
-	row := s.getBuilder(s.db).Select("accounts").Columns("count(*)").QueryRowContext(ctx)
+	row := s.getBuilder(s.db).Select("count(*)").From("accounts").QueryRowContext(ctx)
 	var count int
 	if err := row.Scan(&count); err != nil {
 		return err
@@ -105,18 +113,19 @@ func (s *transactionServer) verifySignatures(ctx context.Context, tx *api.Transa
 	if err != nil {
 		return err
 	}
+	logrus.Infof("verify signatures of %v", account.Id)
 	var sum uint64
+	txCopy := proto.Clone(tx).(*api.Transaction)
+	txCopy.Signatures = nil
 	for name, sig := range tx.Signatures {
 		signer, ok := account.Signers[name]
 		if !ok {
 			return fmt.Errorf("unknown signer %v", name)
 		}
-		algo, err := signatures.GetByName(signer.Type)
+		algo, err := signatures.GetByName(signer.SignatureAlgorithm)
 		if err != nil {
 			return err
 		}
-		txCopy := proto.Clone(tx)
-		txCopy.Signatures = nil
 		pr, pw := io.Pipe()
 		marshaler := &jsonpb.Marshaler{}
 		go marshaler.Marshal(pw, txCopy)

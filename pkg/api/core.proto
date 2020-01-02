@@ -7,12 +7,14 @@ import "google/protobuf/timestamp.proto";
 message Signer {
 	// name of the signer, only used to identify signers in the context of the containing account
 	string name = 1;
-	// type of the signer, e.g. 'ed25519', 'ecdsa', 'sphinx'... Lookup liboqs for more types!
-	string type = 2;
+	// signature_algorithm of the signer, e.g. 'ed25519', 'ecdsa', 'sphinx'... Lookup liboqs for more types!
+	string signature_algorithm = 2;
+	// hash_algorithm specifies the hash algorithm for this signer
+	string hash_algorithm = 3;
 	// pubkey is the public key of the signer
-	bytes pubkey = 3;
+	bytes pubkey = 4;
 	// weight is the weight of a signature of this signer
-	uint64 weight = 4;
+	uint64 weight = 5;
 }
 
 message Account {
