@@ -55,16 +55,16 @@ message Transaction {
 	}
 
 
-	// GenesisContent contains the initial state of the chain
-	message GenesisContent {
+	// GenesisData contains the initial state of the chain
+	message GenesisData {
 		repeated Account accounts = 1;
 	}
-	// CreateAccountContent contains the info that is needed to create a new account
-	message CreateAccountContent {
+	// CreateAccountData contains the info that is needed to create a new account
+	message CreateAccountData {
 		Account account = 1;
 	}
-	// MergeAccountContent contains the id of the target account
-	message MergeAccountContent {
+	// MergeAccountData contains the id of the target account
+	message MergeAccountData {
 		string target_account = 1;
 	}
 	// SendData contains the info needed to transfer tokens from one account to another
@@ -72,33 +72,33 @@ message Transaction {
 		string target_account = 1;
 		uint64 send_amount = 2;
 	}
-	// SetValidatorFlagContent will contain additional properties when seting the validator flag of an account
-	message SetValidatorFlagContent {
+	// SetValidatorFlagData will contain additional properties when seting the validator flag of an account
+	message SetValidatorFlagData {
 		bool is_validator = 1;
 	}
-	// VoteValidatorContent contains the id of the target validator
-	message VoteValidatorContent {
+	// VoteValidatorData contains the id of the target validator
+	message VoteValidatorData {
 		string target_account = 1;
 	}
-	// AddSignerContent contains the new signer
-	message AddSignerContent {
+	// AddSignerData contains the new signer
+	message AddSignerData {
 		Signer signer = 1;
 	}
-	// RemoveSignerContent contains the name of the signer to be removed
-	message RemoveSignerContent {
+	// RemoveSignerData contains the name of the signer to be removed
+	message RemoveSignerData {
 		string name = 1;
 	}
-	// SetThresholdContent contains the new threshold for the target account
-	message SetThresholdContent {
+	// SetThresholdData contains the new threshold for the target account
+	message SetThresholdData {
 		uint64 threshold = 2;
 	}
-	// SetDataContent contains a key/value pair used to update an account scoped value
-	message SetDataContent {
+	// SetDataData contains a key/value pair used to update an account scoped value
+	message SetDataData {
 		string key = 1;
 		bytes data = 2;
 	}
-	// ExecuteContent contains the infos needed to execute a smart contract on the chain
-	message ExecuteContent {
+	// ExecuteData contains the infos needed to execute a smart contract on the chain
+	message ExecuteData {
 		// Type is a enum of all valid smart contract runtimes
 		enum Type {
 			JS = 0;
@@ -134,17 +134,17 @@ message Transaction {
 
 	// content contains the type specific payload for the transaction
 	oneof content {
-		CreateAccountContent create_account_content = 7;
-		MergeAccountContent merge_account_content = 8;
+		CreateAccountData create_account_content = 7;
+		MergeAccountData merge_account_content = 8;
 		SendData send_content = 9;
-		SetValidatorFlagContent set_validator_flag_content = 10;
-		VoteValidatorContent vote_validator_content = 11;
-		AddSignerContent add_signer_content = 12;
-		RemoveSignerContent remove_signer_content = 13;
-		SetThresholdContent set_threshold_content = 14;
-		SetDataContent set_data_content = 15;
-		ExecuteContent execute_content = 16;
-		GenesisContent genesis_content = 17;
+		SetValidatorFlagData set_validator_flag_content = 10;
+		VoteValidatorData vote_validator_content = 11;
+		AddSignerData add_signer_content = 12;
+		RemoveSignerData remove_signer_content = 13;
+		SetThresholdData set_threshold_content = 14;
+		SetDataData set_data_content = 15;
+		ExecuteData execute_content = 16;
+		GenesisData genesis_content = 17;
 	}
 }
 

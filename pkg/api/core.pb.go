@@ -79,28 +79,28 @@ func (Transaction_Type) EnumDescriptor() ([]byte, []int) {
 }
 
 // Type is a enum of all valid smart contract runtimes
-type Transaction_ExecuteContent_Type int32
+type Transaction_ExecuteData_Type int32
 
 const (
-	Transaction_ExecuteContent_JS   Transaction_ExecuteContent_Type = 0
-	Transaction_ExecuteContent_WASM Transaction_ExecuteContent_Type = 1
+	Transaction_ExecuteData_JS   Transaction_ExecuteData_Type = 0
+	Transaction_ExecuteData_WASM Transaction_ExecuteData_Type = 1
 )
 
-var Transaction_ExecuteContent_Type_name = map[int32]string{
+var Transaction_ExecuteData_Type_name = map[int32]string{
 	0: "JS",
 	1: "WASM",
 }
 
-var Transaction_ExecuteContent_Type_value = map[string]int32{
+var Transaction_ExecuteData_Type_value = map[string]int32{
 	"JS":   0,
 	"WASM": 1,
 }
 
-func (x Transaction_ExecuteContent_Type) String() string {
-	return proto.EnumName(Transaction_ExecuteContent_Type_name, int32(x))
+func (x Transaction_ExecuteData_Type) String() string {
+	return proto.EnumName(Transaction_ExecuteData_Type_name, int32(x))
 }
 
-func (Transaction_ExecuteContent_Type) EnumDescriptor() ([]byte, []int) {
+func (Transaction_ExecuteData_Type) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_f7e43720d1edc0fe, []int{2, 10, 0}
 }
 
@@ -302,17 +302,17 @@ type Transaction struct {
 	// content contains the type specific payload for the transaction
 	//
 	// Types that are valid to be assigned to Content:
-	//	*Transaction_CreateAccountContent_
-	//	*Transaction_MergeAccountContent_
+	//	*Transaction_CreateAccountContent
+	//	*Transaction_MergeAccountContent
 	//	*Transaction_SendContent
-	//	*Transaction_SetValidatorFlagContent_
-	//	*Transaction_VoteValidatorContent_
-	//	*Transaction_AddSignerContent_
-	//	*Transaction_RemoveSignerContent_
-	//	*Transaction_SetThresholdContent_
-	//	*Transaction_SetDataContent_
-	//	*Transaction_ExecuteContent_
-	//	*Transaction_GenesisContent_
+	//	*Transaction_SetValidatorFlagContent
+	//	*Transaction_VoteValidatorContent
+	//	*Transaction_AddSignerContent
+	//	*Transaction_RemoveSignerContent
+	//	*Transaction_SetThresholdContent
+	//	*Transaction_SetDataContent
+	//	*Transaction_ExecuteContent
+	//	*Transaction_GenesisContent
 	Content              isTransaction_Content `protobuf_oneof:"content"`
 	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
 	XXX_unrecognized     []byte                `json:"-"`
@@ -390,71 +390,71 @@ type isTransaction_Content interface {
 	isTransaction_Content()
 }
 
-type Transaction_CreateAccountContent_ struct {
-	CreateAccountContent *Transaction_CreateAccountContent `protobuf:"bytes,7,opt,name=create_account_content,json=createAccountContent,proto3,oneof"`
+type Transaction_CreateAccountContent struct {
+	CreateAccountContent *Transaction_CreateAccountData `protobuf:"bytes,7,opt,name=create_account_content,json=createAccountContent,proto3,oneof"`
 }
 
-type Transaction_MergeAccountContent_ struct {
-	MergeAccountContent *Transaction_MergeAccountContent `protobuf:"bytes,8,opt,name=merge_account_content,json=mergeAccountContent,proto3,oneof"`
+type Transaction_MergeAccountContent struct {
+	MergeAccountContent *Transaction_MergeAccountData `protobuf:"bytes,8,opt,name=merge_account_content,json=mergeAccountContent,proto3,oneof"`
 }
 
 type Transaction_SendContent struct {
 	SendContent *Transaction_SendData `protobuf:"bytes,9,opt,name=send_content,json=sendContent,proto3,oneof"`
 }
 
-type Transaction_SetValidatorFlagContent_ struct {
-	SetValidatorFlagContent *Transaction_SetValidatorFlagContent `protobuf:"bytes,10,opt,name=set_validator_flag_content,json=setValidatorFlagContent,proto3,oneof"`
+type Transaction_SetValidatorFlagContent struct {
+	SetValidatorFlagContent *Transaction_SetValidatorFlagData `protobuf:"bytes,10,opt,name=set_validator_flag_content,json=setValidatorFlagContent,proto3,oneof"`
 }
 
-type Transaction_VoteValidatorContent_ struct {
-	VoteValidatorContent *Transaction_VoteValidatorContent `protobuf:"bytes,11,opt,name=vote_validator_content,json=voteValidatorContent,proto3,oneof"`
+type Transaction_VoteValidatorContent struct {
+	VoteValidatorContent *Transaction_VoteValidatorData `protobuf:"bytes,11,opt,name=vote_validator_content,json=voteValidatorContent,proto3,oneof"`
 }
 
-type Transaction_AddSignerContent_ struct {
-	AddSignerContent *Transaction_AddSignerContent `protobuf:"bytes,12,opt,name=add_signer_content,json=addSignerContent,proto3,oneof"`
+type Transaction_AddSignerContent struct {
+	AddSignerContent *Transaction_AddSignerData `protobuf:"bytes,12,opt,name=add_signer_content,json=addSignerContent,proto3,oneof"`
 }
 
-type Transaction_RemoveSignerContent_ struct {
-	RemoveSignerContent *Transaction_RemoveSignerContent `protobuf:"bytes,13,opt,name=remove_signer_content,json=removeSignerContent,proto3,oneof"`
+type Transaction_RemoveSignerContent struct {
+	RemoveSignerContent *Transaction_RemoveSignerData `protobuf:"bytes,13,opt,name=remove_signer_content,json=removeSignerContent,proto3,oneof"`
 }
 
-type Transaction_SetThresholdContent_ struct {
-	SetThresholdContent *Transaction_SetThresholdContent `protobuf:"bytes,14,opt,name=set_threshold_content,json=setThresholdContent,proto3,oneof"`
+type Transaction_SetThresholdContent struct {
+	SetThresholdContent *Transaction_SetThresholdData `protobuf:"bytes,14,opt,name=set_threshold_content,json=setThresholdContent,proto3,oneof"`
 }
 
-type Transaction_SetDataContent_ struct {
-	SetDataContent *Transaction_SetDataContent `protobuf:"bytes,15,opt,name=set_data_content,json=setDataContent,proto3,oneof"`
+type Transaction_SetDataContent struct {
+	SetDataContent *Transaction_SetDataData `protobuf:"bytes,15,opt,name=set_data_content,json=setDataContent,proto3,oneof"`
 }
 
-type Transaction_ExecuteContent_ struct {
-	ExecuteContent *Transaction_ExecuteContent `protobuf:"bytes,16,opt,name=execute_content,json=executeContent,proto3,oneof"`
+type Transaction_ExecuteContent struct {
+	ExecuteContent *Transaction_ExecuteData `protobuf:"bytes,16,opt,name=execute_content,json=executeContent,proto3,oneof"`
 }
 
-type Transaction_GenesisContent_ struct {
-	GenesisContent *Transaction_GenesisContent `protobuf:"bytes,17,opt,name=genesis_content,json=genesisContent,proto3,oneof"`
+type Transaction_GenesisContent struct {
+	GenesisContent *Transaction_GenesisData `protobuf:"bytes,17,opt,name=genesis_content,json=genesisContent,proto3,oneof"`
 }
 
-func (*Transaction_CreateAccountContent_) isTransaction_Content() {}
+func (*Transaction_CreateAccountContent) isTransaction_Content() {}
 
-func (*Transaction_MergeAccountContent_) isTransaction_Content() {}
+func (*Transaction_MergeAccountContent) isTransaction_Content() {}
 
 func (*Transaction_SendContent) isTransaction_Content() {}
 
-func (*Transaction_SetValidatorFlagContent_) isTransaction_Content() {}
+func (*Transaction_SetValidatorFlagContent) isTransaction_Content() {}
 
-func (*Transaction_VoteValidatorContent_) isTransaction_Content() {}
+func (*Transaction_VoteValidatorContent) isTransaction_Content() {}
 
-func (*Transaction_AddSignerContent_) isTransaction_Content() {}
+func (*Transaction_AddSignerContent) isTransaction_Content() {}
 
-func (*Transaction_RemoveSignerContent_) isTransaction_Content() {}
+func (*Transaction_RemoveSignerContent) isTransaction_Content() {}
 
-func (*Transaction_SetThresholdContent_) isTransaction_Content() {}
+func (*Transaction_SetThresholdContent) isTransaction_Content() {}
 
-func (*Transaction_SetDataContent_) isTransaction_Content() {}
+func (*Transaction_SetDataContent) isTransaction_Content() {}
 
-func (*Transaction_ExecuteContent_) isTransaction_Content() {}
+func (*Transaction_ExecuteContent) isTransaction_Content() {}
 
-func (*Transaction_GenesisContent_) isTransaction_Content() {}
+func (*Transaction_GenesisContent) isTransaction_Content() {}
 
 func (m *Transaction) GetContent() isTransaction_Content {
 	if m != nil {
@@ -463,15 +463,15 @@ func (m *Transaction) GetContent() isTransaction_Content {
 	return nil
 }
 
-func (m *Transaction) GetCreateAccountContent() *Transaction_CreateAccountContent {
-	if x, ok := m.GetContent().(*Transaction_CreateAccountContent_); ok {
+func (m *Transaction) GetCreateAccountContent() *Transaction_CreateAccountData {
+	if x, ok := m.GetContent().(*Transaction_CreateAccountContent); ok {
 		return x.CreateAccountContent
 	}
 	return nil
 }
 
-func (m *Transaction) GetMergeAccountContent() *Transaction_MergeAccountContent {
-	if x, ok := m.GetContent().(*Transaction_MergeAccountContent_); ok {
+func (m *Transaction) GetMergeAccountContent() *Transaction_MergeAccountData {
+	if x, ok := m.GetContent().(*Transaction_MergeAccountContent); ok {
 		return x.MergeAccountContent
 	}
 	return nil
@@ -484,57 +484,57 @@ func (m *Transaction) GetSendContent() *Transaction_SendData {
 	return nil
 }
 
-func (m *Transaction) GetSetValidatorFlagContent() *Transaction_SetValidatorFlagContent {
-	if x, ok := m.GetContent().(*Transaction_SetValidatorFlagContent_); ok {
+func (m *Transaction) GetSetValidatorFlagContent() *Transaction_SetValidatorFlagData {
+	if x, ok := m.GetContent().(*Transaction_SetValidatorFlagContent); ok {
 		return x.SetValidatorFlagContent
 	}
 	return nil
 }
 
-func (m *Transaction) GetVoteValidatorContent() *Transaction_VoteValidatorContent {
-	if x, ok := m.GetContent().(*Transaction_VoteValidatorContent_); ok {
+func (m *Transaction) GetVoteValidatorContent() *Transaction_VoteValidatorData {
+	if x, ok := m.GetContent().(*Transaction_VoteValidatorContent); ok {
 		return x.VoteValidatorContent
 	}
 	return nil
 }
 
-func (m *Transaction) GetAddSignerContent() *Transaction_AddSignerContent {
-	if x, ok := m.GetContent().(*Transaction_AddSignerContent_); ok {
+func (m *Transaction) GetAddSignerContent() *Transaction_AddSignerData {
+	if x, ok := m.GetContent().(*Transaction_AddSignerContent); ok {
 		return x.AddSignerContent
 	}
 	return nil
 }
 
-func (m *Transaction) GetRemoveSignerContent() *Transaction_RemoveSignerContent {
-	if x, ok := m.GetContent().(*Transaction_RemoveSignerContent_); ok {
+func (m *Transaction) GetRemoveSignerContent() *Transaction_RemoveSignerData {
+	if x, ok := m.GetContent().(*Transaction_RemoveSignerContent); ok {
 		return x.RemoveSignerContent
 	}
 	return nil
 }
 
-func (m *Transaction) GetSetThresholdContent() *Transaction_SetThresholdContent {
-	if x, ok := m.GetContent().(*Transaction_SetThresholdContent_); ok {
+func (m *Transaction) GetSetThresholdContent() *Transaction_SetThresholdData {
+	if x, ok := m.GetContent().(*Transaction_SetThresholdContent); ok {
 		return x.SetThresholdContent
 	}
 	return nil
 }
 
-func (m *Transaction) GetSetDataContent() *Transaction_SetDataContent {
-	if x, ok := m.GetContent().(*Transaction_SetDataContent_); ok {
+func (m *Transaction) GetSetDataContent() *Transaction_SetDataData {
+	if x, ok := m.GetContent().(*Transaction_SetDataContent); ok {
 		return x.SetDataContent
 	}
 	return nil
 }
 
-func (m *Transaction) GetExecuteContent() *Transaction_ExecuteContent {
-	if x, ok := m.GetContent().(*Transaction_ExecuteContent_); ok {
+func (m *Transaction) GetExecuteContent() *Transaction_ExecuteData {
+	if x, ok := m.GetContent().(*Transaction_ExecuteContent); ok {
 		return x.ExecuteContent
 	}
 	return nil
 }
 
-func (m *Transaction) GetGenesisContent() *Transaction_GenesisContent {
-	if x, ok := m.GetContent().(*Transaction_GenesisContent_); ok {
+func (m *Transaction) GetGenesisContent() *Transaction_GenesisData {
+	if x, ok := m.GetContent().(*Transaction_GenesisContent); ok {
 		return x.GenesisContent
 	}
 	return nil
@@ -543,134 +543,134 @@ func (m *Transaction) GetGenesisContent() *Transaction_GenesisContent {
 // XXX_OneofWrappers is for the internal use of the proto package.
 func (*Transaction) XXX_OneofWrappers() []interface{} {
 	return []interface{}{
-		(*Transaction_CreateAccountContent_)(nil),
-		(*Transaction_MergeAccountContent_)(nil),
+		(*Transaction_CreateAccountContent)(nil),
+		(*Transaction_MergeAccountContent)(nil),
 		(*Transaction_SendContent)(nil),
-		(*Transaction_SetValidatorFlagContent_)(nil),
-		(*Transaction_VoteValidatorContent_)(nil),
-		(*Transaction_AddSignerContent_)(nil),
-		(*Transaction_RemoveSignerContent_)(nil),
-		(*Transaction_SetThresholdContent_)(nil),
-		(*Transaction_SetDataContent_)(nil),
-		(*Transaction_ExecuteContent_)(nil),
-		(*Transaction_GenesisContent_)(nil),
+		(*Transaction_SetValidatorFlagContent)(nil),
+		(*Transaction_VoteValidatorContent)(nil),
+		(*Transaction_AddSignerContent)(nil),
+		(*Transaction_RemoveSignerContent)(nil),
+		(*Transaction_SetThresholdContent)(nil),
+		(*Transaction_SetDataContent)(nil),
+		(*Transaction_ExecuteContent)(nil),
+		(*Transaction_GenesisContent)(nil),
 	}
 }
 
-// GenesisContent contains the initial state of the chain
-type Transaction_GenesisContent struct {
+// GenesisData contains the initial state of the chain
+type Transaction_GenesisData struct {
 	Accounts             []*Account `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
 }
 
-func (m *Transaction_GenesisContent) Reset()         { *m = Transaction_GenesisContent{} }
-func (m *Transaction_GenesisContent) String() string { return proto.CompactTextString(m) }
-func (*Transaction_GenesisContent) ProtoMessage()    {}
-func (*Transaction_GenesisContent) Descriptor() ([]byte, []int) {
+func (m *Transaction_GenesisData) Reset()         { *m = Transaction_GenesisData{} }
+func (m *Transaction_GenesisData) String() string { return proto.CompactTextString(m) }
+func (*Transaction_GenesisData) ProtoMessage()    {}
+func (*Transaction_GenesisData) Descriptor() ([]byte, []int) {
 	return fileDescriptor_f7e43720d1edc0fe, []int{2, 0}
 }
 
-func (m *Transaction_GenesisContent) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Transaction_GenesisContent.Unmarshal(m, b)
+func (m *Transaction_GenesisData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Transaction_GenesisData.Unmarshal(m, b)
 }
-func (m *Transaction_GenesisContent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Transaction_GenesisContent.Marshal(b, m, deterministic)
+func (m *Transaction_GenesisData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Transaction_GenesisData.Marshal(b, m, deterministic)
 }
-func (m *Transaction_GenesisContent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Transaction_GenesisContent.Merge(m, src)
+func (m *Transaction_GenesisData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Transaction_GenesisData.Merge(m, src)
 }
-func (m *Transaction_GenesisContent) XXX_Size() int {
-	return xxx_messageInfo_Transaction_GenesisContent.Size(m)
+func (m *Transaction_GenesisData) XXX_Size() int {
+	return xxx_messageInfo_Transaction_GenesisData.Size(m)
 }
-func (m *Transaction_GenesisContent) XXX_DiscardUnknown() {
-	xxx_messageInfo_Transaction_GenesisContent.DiscardUnknown(m)
+func (m *Transaction_GenesisData) XXX_DiscardUnknown() {
+	xxx_messageInfo_Transaction_GenesisData.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Transaction_GenesisContent proto.InternalMessageInfo
+var xxx_messageInfo_Transaction_GenesisData proto.InternalMessageInfo
 
-func (m *Transaction_GenesisContent) GetAccounts() []*Account {
+func (m *Transaction_GenesisData) GetAccounts() []*Account {
 	if m != nil {
 		return m.Accounts
 	}
 	return nil
 }
 
-// CreateAccountContent contains the info that is needed to create a new account
-type Transaction_CreateAccountContent struct {
+// CreateAccountData contains the info that is needed to create a new account
+type Transaction_CreateAccountData struct {
 	Account              *Account `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Transaction_CreateAccountContent) Reset()         { *m = Transaction_CreateAccountContent{} }
-func (m *Transaction_CreateAccountContent) String() string { return proto.CompactTextString(m) }
-func (*Transaction_CreateAccountContent) ProtoMessage()    {}
-func (*Transaction_CreateAccountContent) Descriptor() ([]byte, []int) {
+func (m *Transaction_CreateAccountData) Reset()         { *m = Transaction_CreateAccountData{} }
+func (m *Transaction_CreateAccountData) String() string { return proto.CompactTextString(m) }
+func (*Transaction_CreateAccountData) ProtoMessage()    {}
+func (*Transaction_CreateAccountData) Descriptor() ([]byte, []int) {
 	return fileDescriptor_f7e43720d1edc0fe, []int{2, 1}
 }
 
-func (m *Transaction_CreateAccountContent) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Transaction_CreateAccountContent.Unmarshal(m, b)
+func (m *Transaction_CreateAccountData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Transaction_CreateAccountData.Unmarshal(m, b)
 }
-func (m *Transaction_CreateAccountContent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Transaction_CreateAccountContent.Marshal(b, m, deterministic)
+func (m *Transaction_CreateAccountData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Transaction_CreateAccountData.Marshal(b, m, deterministic)
 }
-func (m *Transaction_CreateAccountContent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Transaction_CreateAccountContent.Merge(m, src)
+func (m *Transaction_CreateAccountData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Transaction_CreateAccountData.Merge(m, src)
 }
-func (m *Transaction_CreateAccountContent) XXX_Size() int {
-	return xxx_messageInfo_Transaction_CreateAccountContent.Size(m)
+func (m *Transaction_CreateAccountData) XXX_Size() int {
+	return xxx_messageInfo_Transaction_CreateAccountData.Size(m)
 }
-func (m *Transaction_CreateAccountContent) XXX_DiscardUnknown() {
-	xxx_messageInfo_Transaction_CreateAccountContent.DiscardUnknown(m)
+func (m *Transaction_CreateAccountData) XXX_DiscardUnknown() {
+	xxx_messageInfo_Transaction_CreateAccountData.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Transaction_CreateAccountContent proto.InternalMessageInfo
+var xxx_messageInfo_Transaction_CreateAccountData proto.InternalMessageInfo
 
-func (m *Transaction_CreateAccountContent) GetAccount() *Account {
+func (m *Transaction_CreateAccountData) GetAccount() *Account {
 	if m != nil {
 		return m.Account
 	}
 	return nil
 }
 
-// MergeAccountContent contains the id of the target account
-type Transaction_MergeAccountContent struct {
+// MergeAccountData contains the id of the target account
+type Transaction_MergeAccountData struct {
 	TargetAccount        string   `protobuf:"bytes,1,opt,name=target_account,json=targetAccount,proto3" json:"target_account,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Transaction_MergeAccountContent) Reset()         { *m = Transaction_MergeAccountContent{} }
-func (m *Transaction_MergeAccountContent) String() string { return proto.CompactTextString(m) }
-func (*Transaction_MergeAccountContent) ProtoMessage()    {}
-func (*Transaction_MergeAccountContent) Descriptor() ([]byte, []int) {
+func (m *Transaction_MergeAccountData) Reset()         { *m = Transaction_MergeAccountData{} }
+func (m *Transaction_MergeAccountData) String() string { return proto.CompactTextString(m) }
+func (*Transaction_MergeAccountData) ProtoMessage()    {}
+func (*Transaction_MergeAccountData) Descriptor() ([]byte, []int) {
 	return fileDescriptor_f7e43720d1edc0fe, []int{2, 2}
 }
 
-func (m *Transaction_MergeAccountContent) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Transaction_MergeAccountContent.Unmarshal(m, b)
+func (m *Transaction_MergeAccountData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Transaction_MergeAccountData.Unmarshal(m, b)
 }
-func (m *Transaction_MergeAccountContent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Transaction_MergeAccountContent.Marshal(b, m, deterministic)
+func (m *Transaction_MergeAccountData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Transaction_MergeAccountData.Marshal(b, m, deterministic)
 }
-func (m *Transaction_MergeAccountContent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Transaction_MergeAccountContent.Merge(m, src)
+func (m *Transaction_MergeAccountData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Transaction_MergeAccountData.Merge(m, src)
 }
-func (m *Transaction_MergeAccountContent) XXX_Size() int {
-	return xxx_messageInfo_Transaction_MergeAccountContent.Size(m)
+func (m *Transaction_MergeAccountData) XXX_Size() int {
+	return xxx_messageInfo_Transaction_MergeAccountData.Size(m)
 }
-func (m *Transaction_MergeAccountContent) XXX_DiscardUnknown() {
-	xxx_messageInfo_Transaction_MergeAccountContent.DiscardUnknown(m)
+func (m *Transaction_MergeAccountData) XXX_DiscardUnknown() {
+	xxx_messageInfo_Transaction_MergeAccountData.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Transaction_MergeAccountContent proto.InternalMessageInfo
+var xxx_messageInfo_Transaction_MergeAccountData proto.InternalMessageInfo
 
-func (m *Transaction_MergeAccountContent) GetTargetAccount() string {
+func (m *Transaction_MergeAccountData) GetTargetAccount() string {
 	if m != nil {
 		return m.TargetAccount
 	}
@@ -725,208 +725,208 @@ func (m *Transaction_SendData) GetSendAmount() uint64 {
 	return 0
 }
 
-// SetValidatorFlagContent will contain additional properties when seting the validator flag of an account
-type Transaction_SetValidatorFlagContent struct {
+// SetValidatorFlagData will contain additional properties when seting the validator flag of an account
+type Transaction_SetValidatorFlagData struct {
 	IsValidator          bool     `protobuf:"varint,1,opt,name=is_validator,json=isValidator,proto3" json:"is_validator,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Transaction_SetValidatorFlagContent) Reset()         { *m = Transaction_SetValidatorFlagContent{} }
-func (m *Transaction_SetValidatorFlagContent) String() string { return proto.CompactTextString(m) }
-func (*Transaction_SetValidatorFlagContent) ProtoMessage()    {}
-func (*Transaction_SetValidatorFlagContent) Descriptor() ([]byte, []int) {
+func (m *Transaction_SetValidatorFlagData) Reset()         { *m = Transaction_SetValidatorFlagData{} }
+func (m *Transaction_SetValidatorFlagData) String() string { return proto.CompactTextString(m) }
+func (*Transaction_SetValidatorFlagData) ProtoMessage()    {}
+func (*Transaction_SetValidatorFlagData) Descriptor() ([]byte, []int) {
 	return fileDescriptor_f7e43720d1edc0fe, []int{2, 4}
 }
 
-func (m *Transaction_SetValidatorFlagContent) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Transaction_SetValidatorFlagContent.Unmarshal(m, b)
+func (m *Transaction_SetValidatorFlagData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Transaction_SetValidatorFlagData.Unmarshal(m, b)
 }
-func (m *Transaction_SetValidatorFlagContent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Transaction_SetValidatorFlagContent.Marshal(b, m, deterministic)
+func (m *Transaction_SetValidatorFlagData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Transaction_SetValidatorFlagData.Marshal(b, m, deterministic)
 }
-func (m *Transaction_SetValidatorFlagContent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Transaction_SetValidatorFlagContent.Merge(m, src)
+func (m *Transaction_SetValidatorFlagData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Transaction_SetValidatorFlagData.Merge(m, src)
 }
-func (m *Transaction_SetValidatorFlagContent) XXX_Size() int {
-	return xxx_messageInfo_Transaction_SetValidatorFlagContent.Size(m)
+func (m *Transaction_SetValidatorFlagData) XXX_Size() int {
+	return xxx_messageInfo_Transaction_SetValidatorFlagData.Size(m)
 }
-func (m *Transaction_SetValidatorFlagContent) XXX_DiscardUnknown() {
-	xxx_messageInfo_Transaction_SetValidatorFlagContent.DiscardUnknown(m)
+func (m *Transaction_SetValidatorFlagData) XXX_DiscardUnknown() {
+	xxx_messageInfo_Transaction_SetValidatorFlagData.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Transaction_SetValidatorFlagContent proto.InternalMessageInfo
+var xxx_messageInfo_Transaction_SetValidatorFlagData proto.InternalMessageInfo
 
-func (m *Transaction_SetValidatorFlagContent) GetIsValidator() bool {
+func (m *Transaction_SetValidatorFlagData) GetIsValidator() bool {
 	if m != nil {
 		return m.IsValidator
 	}
 	return false
 }
 
-// VoteValidatorContent contains the id of the target validator
-type Transaction_VoteValidatorContent struct {
+// VoteValidatorData contains the id of the target validator
+type Transaction_VoteValidatorData struct {
 	TargetAccount        string   `protobuf:"bytes,1,opt,name=target_account,json=targetAccount,proto3" json:"target_account,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Transaction_VoteValidatorContent) Reset()         { *m = Transaction_VoteValidatorContent{} }
-func (m *Transaction_VoteValidatorContent) String() string { return proto.CompactTextString(m) }
-func (*Transaction_VoteValidatorContent) ProtoMessage()    {}
-func (*Transaction_VoteValidatorContent) Descriptor() ([]byte, []int) {
+func (m *Transaction_VoteValidatorData) Reset()         { *m = Transaction_VoteValidatorData{} }
+func (m *Transaction_VoteValidatorData) String() string { return proto.CompactTextString(m) }
+func (*Transaction_VoteValidatorData) ProtoMessage()    {}
+func (*Transaction_VoteValidatorData) Descriptor() ([]byte, []int) {
 	return fileDescriptor_f7e43720d1edc0fe, []int{2, 5}
 }
 
-func (m *Transaction_VoteValidatorContent) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Transaction_VoteValidatorContent.Unmarshal(m, b)
+func (m *Transaction_VoteValidatorData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Transaction_VoteValidatorData.Unmarshal(m, b)
 }
-func (m *Transaction_VoteValidatorContent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Transaction_VoteValidatorContent.Marshal(b, m, deterministic)
+func (m *Transaction_VoteValidatorData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Transaction_VoteValidatorData.Marshal(b, m, deterministic)
 }
-func (m *Transaction_VoteValidatorContent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Transaction_VoteValidatorContent.Merge(m, src)
+func (m *Transaction_VoteValidatorData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Transaction_VoteValidatorData.Merge(m, src)
 }
-func (m *Transaction_VoteValidatorContent) XXX_Size() int {
-	return xxx_messageInfo_Transaction_VoteValidatorContent.Size(m)
+func (m *Transaction_VoteValidatorData) XXX_Size() int {
+	return xxx_messageInfo_Transaction_VoteValidatorData.Size(m)
 }
-func (m *Transaction_VoteValidatorContent) XXX_DiscardUnknown() {
-	xxx_messageInfo_Transaction_VoteValidatorContent.DiscardUnknown(m)
+func (m *Transaction_VoteValidatorData) XXX_DiscardUnknown() {
+	xxx_messageInfo_Transaction_VoteValidatorData.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Transaction_VoteValidatorContent proto.InternalMessageInfo
+var xxx_messageInfo_Transaction_VoteValidatorData proto.InternalMessageInfo
 
-func (m *Transaction_VoteValidatorContent) GetTargetAccount() string {
+func (m *Transaction_VoteValidatorData) GetTargetAccount() string {
 	if m != nil {
 		return m.TargetAccount
 	}
 	return ""
 }
 
-// AddSignerContent contains the new signer
-type Transaction_AddSignerContent struct {
+// AddSignerData contains the new signer
+type Transaction_AddSignerData struct {
 	Signer               *Signer  `protobuf:"bytes,1,opt,name=signer,proto3" json:"signer,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Transaction_AddSignerContent) Reset()         { *m = Transaction_AddSignerContent{} }
-func (m *Transaction_AddSignerContent) String() string { return proto.CompactTextString(m) }
-func (*Transaction_AddSignerContent) ProtoMessage()    {}
-func (*Transaction_AddSignerContent) Descriptor() ([]byte, []int) {
+func (m *Transaction_AddSignerData) Reset()         { *m = Transaction_AddSignerData{} }
+func (m *Transaction_AddSignerData) String() string { return proto.CompactTextString(m) }
+func (*Transaction_AddSignerData) ProtoMessage()    {}
+func (*Transaction_AddSignerData) Descriptor() ([]byte, []int) {
 	return fileDescriptor_f7e43720d1edc0fe, []int{2, 6}
 }
 
-func (m *Transaction_AddSignerContent) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Transaction_AddSignerContent.Unmarshal(m, b)
+func (m *Transaction_AddSignerData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Transaction_AddSignerData.Unmarshal(m, b)
 }
-func (m *Transaction_AddSignerContent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Transaction_AddSignerContent.Marshal(b, m, deterministic)
+func (m *Transaction_AddSignerData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Transaction_AddSignerData.Marshal(b, m, deterministic)
 }
-func (m *Transaction_AddSignerContent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Transaction_AddSignerContent.Merge(m, src)
+func (m *Transaction_AddSignerData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Transaction_AddSignerData.Merge(m, src)
 }
-func (m *Transaction_AddSignerContent) XXX_Size() int {
-	return xxx_messageInfo_Transaction_AddSignerContent.Size(m)
+func (m *Transaction_AddSignerData) XXX_Size() int {
+	return xxx_messageInfo_Transaction_AddSignerData.Size(m)
 }
-func (m *Transaction_AddSignerContent) XXX_DiscardUnknown() {
-	xxx_messageInfo_Transaction_AddSignerContent.DiscardUnknown(m)
+func (m *Transaction_AddSignerData) XXX_DiscardUnknown() {
+	xxx_messageInfo_Transaction_AddSignerData.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Transaction_AddSignerContent proto.InternalMessageInfo
+var xxx_messageInfo_Transaction_AddSignerData proto.InternalMessageInfo
 
-func (m *Transaction_AddSignerContent) GetSigner() *Signer {
+func (m *Transaction_AddSignerData) GetSigner() *Signer {
 	if m != nil {
 		return m.Signer
 	}
 	return nil
 }
 
-// RemoveSignerContent contains the name of the signer to be removed
-type Transaction_RemoveSignerContent struct {
+// RemoveSignerData contains the name of the signer to be removed
+type Transaction_RemoveSignerData struct {
 	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Transaction_RemoveSignerContent) Reset()         { *m = Transaction_RemoveSignerContent{} }
-func (m *Transaction_RemoveSignerContent) String() string { return proto.CompactTextString(m) }
-func (*Transaction_RemoveSignerContent) ProtoMessage()    {}
-func (*Transaction_RemoveSignerContent) Descriptor() ([]byte, []int) {
+func (m *Transaction_RemoveSignerData) Reset()         { *m = Transaction_RemoveSignerData{} }
+func (m *Transaction_RemoveSignerData) String() string { return proto.CompactTextString(m) }
+func (*Transaction_RemoveSignerData) ProtoMessage()    {}
+func (*Transaction_RemoveSignerData) Descriptor() ([]byte, []int) {
 	return fileDescriptor_f7e43720d1edc0fe, []int{2, 7}
 }
 
-func (m *Transaction_RemoveSignerContent) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Transaction_RemoveSignerContent.Unmarshal(m, b)
+func (m *Transaction_RemoveSignerData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Transaction_RemoveSignerData.Unmarshal(m, b)
 }
-func (m *Transaction_RemoveSignerContent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Transaction_RemoveSignerContent.Marshal(b, m, deterministic)
+func (m *Transaction_RemoveSignerData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Transaction_RemoveSignerData.Marshal(b, m, deterministic)
 }
-func (m *Transaction_RemoveSignerContent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Transaction_RemoveSignerContent.Merge(m, src)
+func (m *Transaction_RemoveSignerData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Transaction_RemoveSignerData.Merge(m, src)
 }
-func (m *Transaction_RemoveSignerContent) XXX_Size() int {
-	return xxx_messageInfo_Transaction_RemoveSignerContent.Size(m)
+func (m *Transaction_RemoveSignerData) XXX_Size() int {
+	return xxx_messageInfo_Transaction_RemoveSignerData.Size(m)
 }
-func (m *Transaction_RemoveSignerContent) XXX_DiscardUnknown() {
-	xxx_messageInfo_Transaction_RemoveSignerContent.DiscardUnknown(m)
+func (m *Transaction_RemoveSignerData) XXX_DiscardUnknown() {
+	xxx_messageInfo_Transaction_RemoveSignerData.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Transaction_RemoveSignerContent proto.InternalMessageInfo
+var xxx_messageInfo_Transaction_RemoveSignerData proto.InternalMessageInfo
 
-func (m *Transaction_RemoveSignerContent) GetName() string {
+func (m *Transaction_RemoveSignerData) GetName() string {
 	if m != nil {
 		return m.Name
 	}
 	return ""
 }
 
-// SetThresholdContent contains the new threshold for the target account
-type Transaction_SetThresholdContent struct {
+// SetThresholdData contains the new threshold for the target account
+type Transaction_SetThresholdData struct {
 	Threshold            uint64   `protobuf:"varint,2,opt,name=threshold,proto3" json:"threshold,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Transaction_SetThresholdContent) Reset()         { *m = Transaction_SetThresholdContent{} }
-func (m *Transaction_SetThresholdContent) String() string { return proto.CompactTextString(m) }
-func (*Transaction_SetThresholdContent) ProtoMessage()    {}
-func (*Transaction_SetThresholdContent) Descriptor() ([]byte, []int) {
+func (m *Transaction_SetThresholdData) Reset()         { *m = Transaction_SetThresholdData{} }
+func (m *Transaction_SetThresholdData) String() string { return proto.CompactTextString(m) }
+func (*Transaction_SetThresholdData) ProtoMessage()    {}
+func (*Transaction_SetThresholdData) Descriptor() ([]byte, []int) {
 	return fileDescriptor_f7e43720d1edc0fe, []int{2, 8}
 }
 
-func (m *Transaction_SetThresholdContent) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Transaction_SetThresholdContent.Unmarshal(m, b)
+func (m *Transaction_SetThresholdData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Transaction_SetThresholdData.Unmarshal(m, b)
 }
-func (m *Transaction_SetThresholdContent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Transaction_SetThresholdContent.Marshal(b, m, deterministic)
+func (m *Transaction_SetThresholdData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Transaction_SetThresholdData.Marshal(b, m, deterministic)
 }
-func (m *Transaction_SetThresholdContent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Transaction_SetThresholdContent.Merge(m, src)
+func (m *Transaction_SetThresholdData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Transaction_SetThresholdData.Merge(m, src)
 }
-func (m *Transaction_SetThresholdContent) XXX_Size() int {
-	return xxx_messageInfo_Transaction_SetThresholdContent.Size(m)
+func (m *Transaction_SetThresholdData) XXX_Size() int {
+	return xxx_messageInfo_Transaction_SetThresholdData.Size(m)
 }
-func (m *Transaction_SetThresholdContent) XXX_DiscardUnknown() {
-	xxx_messageInfo_Transaction_SetThresholdContent.DiscardUnknown(m)
+func (m *Transaction_SetThresholdData) XXX_DiscardUnknown() {
+	xxx_messageInfo_Transaction_SetThresholdData.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Transaction_SetThresholdContent proto.InternalMessageInfo
+var xxx_messageInfo_Transaction_SetThresholdData proto.InternalMessageInfo
 
-func (m *Transaction_SetThresholdContent) GetThreshold() uint64 {
+func (m *Transaction_SetThresholdData) GetThreshold() uint64 {
 	if m != nil {
 		return m.Threshold
 	}
 	return 0
 }
 
-// SetDataContent contains a key/value pair used to update an account scoped value
-type Transaction_SetDataContent struct {
+// SetDataData contains a key/value pair used to update an account scoped value
+type Transaction_SetDataData struct {
 	Key                  string   `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
 	Data                 []byte   `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -934,53 +934,53 @@ type Transaction_SetDataContent struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Transaction_SetDataContent) Reset()         { *m = Transaction_SetDataContent{} }
-func (m *Transaction_SetDataContent) String() string { return proto.CompactTextString(m) }
-func (*Transaction_SetDataContent) ProtoMessage()    {}
-func (*Transaction_SetDataContent) Descriptor() ([]byte, []int) {
+func (m *Transaction_SetDataData) Reset()         { *m = Transaction_SetDataData{} }
+func (m *Transaction_SetDataData) String() string { return proto.CompactTextString(m) }
+func (*Transaction_SetDataData) ProtoMessage()    {}
+func (*Transaction_SetDataData) Descriptor() ([]byte, []int) {
 	return fileDescriptor_f7e43720d1edc0fe, []int{2, 9}
 }
 
-func (m *Transaction_SetDataContent) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Transaction_SetDataContent.Unmarshal(m, b)
+func (m *Transaction_SetDataData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Transaction_SetDataData.Unmarshal(m, b)
 }
-func (m *Transaction_SetDataContent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Transaction_SetDataContent.Marshal(b, m, deterministic)
+func (m *Transaction_SetDataData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Transaction_SetDataData.Marshal(b, m, deterministic)
 }
-func (m *Transaction_SetDataContent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Transaction_SetDataContent.Merge(m, src)
+func (m *Transaction_SetDataData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Transaction_SetDataData.Merge(m, src)
 }
-func (m *Transaction_SetDataContent) XXX_Size() int {
-	return xxx_messageInfo_Transaction_SetDataContent.Size(m)
+func (m *Transaction_SetDataData) XXX_Size() int {
+	return xxx_messageInfo_Transaction_SetDataData.Size(m)
 }
-func (m *Transaction_SetDataContent) XXX_DiscardUnknown() {
-	xxx_messageInfo_Transaction_SetDataContent.DiscardUnknown(m)
+func (m *Transaction_SetDataData) XXX_DiscardUnknown() {
+	xxx_messageInfo_Transaction_SetDataData.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Transaction_SetDataContent proto.InternalMessageInfo
+var xxx_messageInfo_Transaction_SetDataData proto.InternalMessageInfo
 
-func (m *Transaction_SetDataContent) GetKey() string {
+func (m *Transaction_SetDataData) GetKey() string {
 	if m != nil {
 		return m.Key
 	}
 	return ""
 }
 
-func (m *Transaction_SetDataContent) GetData() []byte {
+func (m *Transaction_SetDataData) GetData() []byte {
 	if m != nil {
 		return m.Data
 	}
 	return nil
 }
 
-// ExecuteContent contains the infos needed to execute a smart contract on the chain
-type Transaction_ExecuteContent struct {
+// ExecuteData contains the infos needed to execute a smart contract on the chain
+type Transaction_ExecuteData struct {
 	// account of the smart contract
 	Account string `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
 	// key under which the contract can be found on the account
 	Key string `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`
 	// type specifies which runtime should be used
-	Type Transaction_ExecuteContent_Type `protobuf:"varint,3,opt,name=type,proto3,enum=Transaction_ExecuteContent_Type" json:"type,omitempty"`
+	Type Transaction_ExecuteData_Type `protobuf:"varint,3,opt,name=type,proto3,enum=Transaction_ExecuteData_Type" json:"type,omitempty"`
 	// entrypoint specifies the toplevel function to call in the specified contract
 	Entrypoint string `protobuf:"bytes,4,opt,name=entrypoint,proto3" json:"entrypoint,omitempty"`
 	// args are supplied to the smart contract
@@ -992,67 +992,67 @@ type Transaction_ExecuteContent struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *Transaction_ExecuteContent) Reset()         { *m = Transaction_ExecuteContent{} }
-func (m *Transaction_ExecuteContent) String() string { return proto.CompactTextString(m) }
-func (*Transaction_ExecuteContent) ProtoMessage()    {}
-func (*Transaction_ExecuteContent) Descriptor() ([]byte, []int) {
+func (m *Transaction_ExecuteData) Reset()         { *m = Transaction_ExecuteData{} }
+func (m *Transaction_ExecuteData) String() string { return proto.CompactTextString(m) }
+func (*Transaction_ExecuteData) ProtoMessage()    {}
+func (*Transaction_ExecuteData) Descriptor() ([]byte, []int) {
 	return fileDescriptor_f7e43720d1edc0fe, []int{2, 10}
 }
 
-func (m *Transaction_ExecuteContent) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Transaction_ExecuteContent.Unmarshal(m, b)
+func (m *Transaction_ExecuteData) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Transaction_ExecuteData.Unmarshal(m, b)
 }
-func (m *Transaction_ExecuteContent) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Transaction_ExecuteContent.Marshal(b, m, deterministic)
+func (m *Transaction_ExecuteData) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Transaction_ExecuteData.Marshal(b, m, deterministic)
 }
-func (m *Transaction_ExecuteContent) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Transaction_ExecuteContent.Merge(m, src)
+func (m *Transaction_ExecuteData) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Transaction_ExecuteData.Merge(m, src)
 }
-func (m *Transaction_ExecuteContent) XXX_Size() int {
-	return xxx_messageInfo_Transaction_ExecuteContent.Size(m)
+func (m *Transaction_ExecuteData) XXX_Size() int {
+	return xxx_messageInfo_Transaction_ExecuteData.Size(m)
 }
-func (m *Transaction_ExecuteContent) XXX_DiscardUnknown() {
-	xxx_messageInfo_Transaction_ExecuteContent.DiscardUnknown(m)
+func (m *Transaction_ExecuteData) XXX_DiscardUnknown() {
+	xxx_messageInfo_Transaction_ExecuteData.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Transaction_ExecuteContent proto.InternalMessageInfo
+var xxx_messageInfo_Transaction_ExecuteData proto.InternalMessageInfo
 
-func (m *Transaction_ExecuteContent) GetAccount() string {
+func (m *Transaction_ExecuteData) GetAccount() string {
 	if m != nil {
 		return m.Account
 	}
 	return ""
 }
 
-func (m *Transaction_ExecuteContent) GetKey() string {
+func (m *Transaction_ExecuteData) GetKey() string {
 	if m != nil {
 		return m.Key
 	}
 	return ""
 }
 
-func (m *Transaction_ExecuteContent) GetType() Transaction_ExecuteContent_Type {
+func (m *Transaction_ExecuteData) GetType() Transaction_ExecuteData_Type {
 	if m != nil {
 		return m.Type
 	}
-	return Transaction_ExecuteContent_JS
+	return Transaction_ExecuteData_JS
 }
 
-func (m *Transaction_ExecuteContent) GetEntrypoint() string {
+func (m *Transaction_ExecuteData) GetEntrypoint() string {
 	if m != nil {
 		return m.Entrypoint
 	}
 	return ""
 }
 
-func (m *Transaction_ExecuteContent) GetArgs() map[string]string {
+func (m *Transaction_ExecuteData) GetArgs() map[string]string {
 	if m != nil {
 		return m.Args
 	}
 	return nil
 }
 
-func (m *Transaction_ExecuteContent) GetCompensation() uint64 {
+func (m *Transaction_ExecuteData) GetCompensation() uint64 {
 	if m != nil {
 		return m.Compensation
 	}
@@ -1557,24 +1557,24 @@ func (m *GetValidatorsResponse) GetWitnesses() []*Validator {
 
 func init() {
 	proto.RegisterEnum("Transaction_Type", Transaction_Type_name, Transaction_Type_value)
-	proto.RegisterEnum("Transaction_ExecuteContent_Type", Transaction_ExecuteContent_Type_name, Transaction_ExecuteContent_Type_value)
+	proto.RegisterEnum("Transaction_ExecuteData_Type", Transaction_ExecuteData_Type_name, Transaction_ExecuteData_Type_value)
 	proto.RegisterType((*Signer)(nil), "Signer")
 	proto.RegisterType((*Account)(nil), "Account")
 	proto.RegisterMapType((map[string]*Signer)(nil), "Account.SignersEntry")
 	proto.RegisterType((*Transaction)(nil), "Transaction")
 	proto.RegisterMapType((map[string][]byte)(nil), "Transaction.SignaturesEntry")
-	proto.RegisterType((*Transaction_GenesisContent)(nil), "Transaction.GenesisContent")
-	proto.RegisterType((*Transaction_CreateAccountContent)(nil), "Transaction.CreateAccountContent")
-	proto.RegisterType((*Transaction_MergeAccountContent)(nil), "Transaction.MergeAccountContent")
+	proto.RegisterType((*Transaction_GenesisData)(nil), "Transaction.GenesisData")
+	proto.RegisterType((*Transaction_CreateAccountData)(nil), "Transaction.CreateAccountData")
+	proto.RegisterType((*Transaction_MergeAccountData)(nil), "Transaction.MergeAccountData")
 	proto.RegisterType((*Transaction_SendData)(nil), "Transaction.SendData")
-	proto.RegisterType((*Transaction_SetValidatorFlagContent)(nil), "Transaction.SetValidatorFlagContent")
-	proto.RegisterType((*Transaction_VoteValidatorContent)(nil), "Transaction.VoteValidatorContent")
-	proto.RegisterType((*Transaction_AddSignerContent)(nil), "Transaction.AddSignerContent")
-	proto.RegisterType((*Transaction_RemoveSignerContent)(nil), "Transaction.RemoveSignerContent")
-	proto.RegisterType((*Transaction_SetThresholdContent)(nil), "Transaction.SetThresholdContent")
-	proto.RegisterType((*Transaction_SetDataContent)(nil), "Transaction.SetDataContent")
-	proto.RegisterType((*Transaction_ExecuteContent)(nil), "Transaction.ExecuteContent")
-	proto.RegisterMapType((map[string]string)(nil), "Transaction.ExecuteContent.ArgsEntry")
+	proto.RegisterType((*Transaction_SetValidatorFlagData)(nil), "Transaction.SetValidatorFlagData")
+	proto.RegisterType((*Transaction_VoteValidatorData)(nil), "Transaction.VoteValidatorData")
+	proto.RegisterType((*Transaction_AddSignerData)(nil), "Transaction.AddSignerData")
+	proto.RegisterType((*Transaction_RemoveSignerData)(nil), "Transaction.RemoveSignerData")
+	proto.RegisterType((*Transaction_SetThresholdData)(nil), "Transaction.SetThresholdData")
+	proto.RegisterType((*Transaction_SetDataData)(nil), "Transaction.SetDataData")
+	proto.RegisterType((*Transaction_ExecuteData)(nil), "Transaction.ExecuteData")
+	proto.RegisterMapType((map[string]string)(nil), "Transaction.ExecuteData.ArgsEntry")
 	proto.RegisterType((*VerifyResponse)(nil), "VerifyResponse")
 	proto.RegisterType((*ApplyResponse)(nil), "ApplyResponse")
 	proto.RegisterType((*GetAccountRequest)(nil), "GetAccountRequest")
@@ -1591,100 +1591,100 @@ func init() {
 func init() { proto.RegisterFile("core.proto", fileDescriptor_f7e43720d1edc0fe) }
 
 var fileDescriptor_f7e43720d1edc0fe = []byte{
-	// 1478 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x57, 0xeb, 0x6e, 0xdb, 0x36,
-	0x14, 0xae, 0x7c, 0xf7, 0xb1, 0xe3, 0x28, 0xcc, 0xa5, 0x86, 0xd6, 0xae, 0xae, 0xd6, 0xa0, 0xd9,
-	0x50, 0x28, 0x9d, 0x5b, 0xac, 0x6b, 0xd1, 0x0c, 0x50, 0x63, 0xd5, 0xe9, 0x90, 0x0b, 0x40, 0xbb,
-	0xd9, 0xe5, 0xc7, 0x0c, 0xc6, 0x66, 0x1c, 0x21, 0xb6, 0xe4, 0x89, 0x74, 0xda, 0x60, 0x0f, 0xb1,
-	0x97, 0xe8, 0x8b, 0x0c, 0xd8, 0x5b, 0xec, 0x65, 0x06, 0x52, 0x17, 0x4b, 0xb2, 0xda, 0x66, 0xfb,
-	0x27, 0x7e, 0xfc, 0xf8, 0xf9, 0x5c, 0x79, 0x68, 0x80, 0xa1, 0xeb, 0x51, 0x63, 0xe6, 0xb9, 0xdc,
-	0xd5, 0xee, 0x8d, 0x5d, 0x77, 0x3c, 0xa1, 0xbb, 0x72, 0x75, 0x36, 0x3f, 0xdf, 0xe5, 0xf6, 0x94,
-	0x32, 0x4e, 0xa6, 0x33, 0x9f, 0xa0, 0x7f, 0x50, 0xa0, 0xd4, 0xb3, 0xc7, 0x0e, 0xf5, 0x10, 0x82,
-	0x82, 0x43, 0xa6, 0xb4, 0xa9, 0xb4, 0x94, 0x9d, 0x2a, 0x96, 0xdf, 0x68, 0x17, 0xd6, 0x99, 0x3d,
-	0x76, 0x08, 0x9f, 0x7b, 0x74, 0x40, 0x26, 0x63, 0xd7, 0xb3, 0xf9, 0xc5, 0xb4, 0x99, 0x93, 0x14,
-	0x14, 0x6d, 0x99, 0xe1, 0x0e, 0xda, 0x86, 0xc6, 0x05, 0x61, 0x17, 0x31, 0x6e, 0x5e, 0x72, 0x57,
-	0x04, 0xba, 0xa0, 0x6d, 0x41, 0x69, 0x36, 0x3f, 0xbb, 0xa4, 0xd7, 0xcd, 0x42, 0x4b, 0xd9, 0xa9,
-	0xe3, 0x60, 0x25, 0xf0, 0x77, 0xd4, 0x1e, 0x5f, 0xf0, 0x66, 0xb1, 0xa5, 0xec, 0x14, 0x70, 0xb0,
-	0xd2, 0xff, 0xc9, 0x41, 0xd9, 0x1c, 0x0e, 0xdd, 0xb9, 0xc3, 0x51, 0x03, 0x72, 0xf6, 0x28, 0xb0,
-	0x32, 0x67, 0x8f, 0x50, 0x0b, 0x6a, 0x23, 0xca, 0x86, 0x9e, 0x3d, 0xe3, 0xb6, 0xeb, 0x04, 0xb6,
-	0xc5, 0x21, 0xb4, 0x0b, 0x65, 0x26, 0x7d, 0x64, 0xcd, 0x7c, 0x2b, 0xbf, 0x53, 0x6b, 0x6f, 0x1a,
-	0x81, 0x98, 0xe1, 0xfb, 0xce, 0x2c, 0x87, 0x7b, 0xd7, 0x38, 0x64, 0xa1, 0x3b, 0x50, 0xe5, 0x17,
-	0x1e, 0x65, 0x17, 0xee, 0x64, 0x24, 0x2d, 0x2c, 0xe0, 0x05, 0x80, 0x9a, 0x50, 0x3e, 0x23, 0x13,
-	0xe2, 0x0c, 0x69, 0x60, 0x65, 0xb8, 0x44, 0xf7, 0xa1, 0x6e, 0xb3, 0xc1, 0x15, 0x99, 0xd8, 0x23,
-	0xc2, 0x5d, 0xaf, 0x59, 0x6a, 0x29, 0x3b, 0x15, 0x5c, 0xb3, 0xd9, 0x69, 0x08, 0x89, 0x28, 0x5f,
-	0xb9, 0x9c, 0x36, 0xcb, 0x7e, 0x94, 0xc5, 0x37, 0x7a, 0x0e, 0x30, 0xf4, 0x28, 0xe1, 0x74, 0x34,
-	0x20, 0xbc, 0x59, 0x69, 0x29, 0x3b, 0xb5, 0xb6, 0x66, 0xf8, 0xa9, 0x33, 0xc2, 0xd4, 0x19, 0xfd,
-	0x30, 0x75, 0xb8, 0x1a, 0xb0, 0x4d, 0xae, 0xed, 0x43, 0x3d, 0xee, 0x02, 0x52, 0x21, 0x2f, 0xa2,
-	0xea, 0x47, 0x47, 0x7c, 0xa2, 0xbb, 0x50, 0xbc, 0x22, 0x93, 0x39, 0x95, 0x81, 0xa9, 0xb5, 0xcb,
-	0x81, 0xcb, 0xd8, 0x47, 0x5f, 0xe4, 0xbe, 0x57, 0xf4, 0x0f, 0x08, 0x6a, 0x7d, 0x8f, 0x38, 0x8c,
-	0x0c, 0x65, 0xbc, 0xd2, 0x11, 0xde, 0x86, 0x02, 0xbf, 0x9e, 0xf9, 0x0a, 0x8d, 0xf6, 0x9a, 0x11,
-	0xe3, 0x1a, 0xfd, 0xeb, 0x19, 0xc5, 0x72, 0x5b, 0xe4, 0x9e, 0xb9, 0x73, 0x6f, 0x48, 0x07, 0xc4,
-	0x8f, 0x6e, 0x98, 0x7b, 0x1f, 0x0d, 0xf3, 0x97, 0xf4, 0xb6, 0xf0, 0x1f, 0xbc, 0x45, 0x2f, 0x01,
-	0xa2, 0x9a, 0x63, 0xcd, 0xa2, 0xcc, 0xe5, 0x9d, 0x84, 0x39, 0xbd, 0x68, 0xdb, 0x4f, 0x69, 0x8c,
-	0x2f, 0x42, 0x7f, 0x4e, 0x29, 0x93, 0x59, 0x29, 0x60, 0xf9, 0x8d, 0x7e, 0x81, 0x2d, 0x5f, 0x3e,
-	0xb4, 0x79, 0x30, 0x74, 0x1d, 0x4e, 0x1d, 0x2e, 0x13, 0x54, 0x6b, 0xdf, 0x4f, 0xa8, 0xef, 0x4b,
-	0x6a, 0xe0, 0xc8, 0xbe, 0x4f, 0x3c, 0xb8, 0x85, 0x37, 0x86, 0x19, 0x38, 0x3a, 0x85, 0xcd, 0x29,
-	0xf5, 0xc6, 0xcb, 0xca, 0x7e, 0x82, 0x5b, 0x09, 0xe5, 0x23, 0xc1, 0x5c, 0x12, 0x5e, 0x9f, 0x2e,
-	0xc3, 0xe8, 0x05, 0xd4, 0x19, 0x75, 0x46, 0x91, 0x5c, 0x55, 0xca, 0x6d, 0x26, 0xc3, 0x40, 0x9d,
-	0x51, 0x87, 0x70, 0x72, 0x70, 0x0b, 0xd7, 0x04, 0x39, 0x3c, 0x3b, 0x04, 0x8d, 0x51, 0xbe, 0xa8,
-	0xd0, 0xc1, 0xf9, 0x84, 0x8c, 0x23, 0x25, 0x90, 0x4a, 0x0f, 0x52, 0x4a, 0x3c, 0x2a, 0xde, 0xd7,
-	0x13, 0x32, 0x5e, 0x18, 0x77, 0x9b, 0x65, 0x6f, 0x89, 0x98, 0x8a, 0xb2, 0x8e, 0xfd, 0x4a, 0xf8,
-	0x03, 0xb5, 0x8c, 0x98, 0x9e, 0xba, 0x9c, 0x46, 0x32, 0xb1, 0x98, 0x5e, 0x65, 0xe0, 0xe8, 0x08,
-	0x10, 0x19, 0x8d, 0x06, 0x7e, 0x9f, 0x46, 0xb2, 0x75, 0x29, 0x7b, 0x37, 0x21, 0x6b, 0x8e, 0x46,
-	0x7e, 0xa1, 0x2f, 0x24, 0x55, 0x92, 0xc2, 0x44, 0x8a, 0x3c, 0x3a, 0x75, 0xaf, 0x68, 0x5a, 0x71,
-	0x25, 0x23, 0x45, 0x58, 0x32, 0xd3, 0xa2, 0xeb, 0xde, 0x32, 0x2c, 0x74, 0x45, 0x98, 0xa3, 0x2b,
-	0x23, 0xd2, 0x6d, 0x64, 0xe8, 0xf6, 0x28, 0xef, 0x87, 0xc4, 0x98, 0x2e, 0x5b, 0x86, 0x51, 0x17,
-	0x54, 0xa1, 0x3b, 0x22, 0x9c, 0x44, 0x92, 0xab, 0x52, 0xf2, 0x8b, 0xb4, 0xa4, 0xc8, 0xfe, 0x42,
-	0xad, 0xc1, 0x12, 0x08, 0x7a, 0x0d, 0xab, 0xf4, 0x3d, 0x1d, 0xce, 0x39, 0x8d, 0x74, 0xd4, 0x0c,
-	0x1d, 0xcb, 0xe7, 0xc4, 0x74, 0x68, 0x02, 0x11, 0x3a, 0x63, 0xea, 0x50, 0x66, 0xb3, 0x48, 0x67,
-	0x2d, 0x43, 0xa7, 0xeb, 0x73, 0x62, 0x3a, 0xe3, 0x04, 0xa2, 0x7d, 0x07, 0x8d, 0x24, 0x07, 0x3d,
-	0x80, 0x4a, 0xd0, 0x37, 0xac, 0xa9, 0xc8, 0x46, 0xaf, 0x84, 0x97, 0x36, 0x8e, 0x76, 0xb4, 0x17,
-	0xb0, 0x91, 0xd5, 0x93, 0x48, 0x87, 0x72, 0x78, 0x07, 0x29, 0xd2, 0x9e, 0xc5, 0xe1, 0x70, 0x43,
-	0x7b, 0x09, 0xeb, 0x19, 0x5d, 0x27, 0x6e, 0x31, 0x4e, 0xbc, 0x31, 0xe5, 0x83, 0xb8, 0x42, 0x15,
-	0xaf, 0xf8, 0x68, 0xc0, 0xd6, 0x30, 0x54, 0xc2, 0x26, 0xbb, 0xe1, 0x11, 0x74, 0x0f, 0x64, 0x2f,
-	0x0e, 0xc8, 0x54, 0x72, 0x72, 0xf2, 0x1a, 0x02, 0x01, 0x99, 0xd3, 0xc0, 0xa2, 0xdb, 0x1f, 0x69,
-	0xb7, 0xa5, 0xc9, 0xa2, 0x2c, 0x4d, 0x16, 0x6d, 0x0f, 0x36, 0xb2, 0x7a, 0xe9, 0xa6, 0x0e, 0x3d,
-	0x01, 0x35, 0xdd, 0x33, 0xe8, 0x1e, 0x94, 0xfc, 0xc6, 0x08, 0xa2, 0x18, 0x0d, 0x8f, 0x00, 0xd6,
-	0xbe, 0x86, 0xf5, 0x8c, 0xb6, 0xc8, 0x7a, 0x4a, 0x68, 0x4f, 0x60, 0x3d, 0xa3, 0xd2, 0x93, 0xa3,
-	0x36, 0x97, 0x1a, 0xb5, 0xa2, 0x2e, 0x92, 0xb5, 0x9c, 0x31, 0xe0, 0x10, 0x14, 0x44, 0x43, 0xc8,
-	0xc3, 0x75, 0x2c, 0xbf, 0xb5, 0xbf, 0x73, 0xd0, 0x48, 0x16, 0xaf, 0x98, 0xda, 0x49, 0xff, 0xc3,
-	0x65, 0x28, 0x99, 0x5b, 0x48, 0x3e, 0x0d, 0x06, 0x5e, 0x5e, 0x0e, 0xbc, 0xd6, 0x27, 0x7a, 0x22,
-	0x3e, 0xff, 0xbe, 0x04, 0xa0, 0x62, 0xe8, 0xcc, 0x5c, 0xdb, 0xf1, 0x07, 0x5b, 0x15, 0xc7, 0x10,
-	0xf4, 0x1c, 0x0a, 0xc4, 0x1b, 0x87, 0x73, 0x6b, 0xfb, 0x53, 0xaa, 0xa6, 0x37, 0x0e, 0x06, 0x98,
-	0x3c, 0x82, 0x74, 0xa8, 0x0f, 0xdd, 0xe9, 0x8c, 0x3a, 0x8c, 0xc8, 0x47, 0x8e, 0x3f, 0xc2, 0x12,
-	0x98, 0xf6, 0x0c, 0xaa, 0xd1, 0xb1, 0x8c, 0x30, 0x6d, 0xc4, 0xdf, 0x01, 0xd5, 0xf8, 0xf8, 0x6f,
-	0x42, 0x41, 0x78, 0x81, 0x4a, 0x90, 0xfb, 0xb1, 0xa7, 0xde, 0x42, 0x15, 0x28, 0xfc, 0x64, 0xf6,
-	0x8e, 0x54, 0x45, 0xdb, 0x83, 0xd5, 0xd4, 0x40, 0xfd, 0x9c, 0x70, 0x3d, 0x2e, 0xfc, 0x97, 0x12,
-	0x28, 0xd7, 0xa0, 0xdc, 0xb5, 0x8e, 0xad, 0xde, 0x1b, 0x21, 0x8f, 0xa0, 0xb1, 0x8f, 0x2d, 0xb3,
-	0x6f, 0x0d, 0xcc, 0xfd, 0xfd, 0x93, 0xb7, 0xc7, 0x7d, 0x55, 0x41, 0x6b, 0xb0, 0x72, 0x64, 0xe1,
-	0xee, 0x02, 0xca, 0x09, 0x2b, 0x7a, 0xd6, 0x71, 0x47, 0xcd, 0xa3, 0x2d, 0x40, 0x3d, 0xab, 0x3f,
-	0x38, 0x35, 0x0f, 0xdf, 0x74, 0xcc, 0xfe, 0x09, 0x1e, 0xbc, 0x3e, 0x34, 0xbb, 0x6a, 0x41, 0x08,
-	0x9d, 0x9e, 0xf4, 0xad, 0xc5, 0x86, 0x5a, 0x44, 0x0d, 0x00, 0xb3, 0xd3, 0x19, 0xf4, 0xde, 0x74,
-	0x8f, 0x2d, 0xac, 0x96, 0x84, 0x30, 0xb6, 0x8e, 0x4e, 0x4e, 0xad, 0x10, 0x2a, 0x0b, 0x48, 0xc8,
-	0xf5, 0x0f, 0xb0, 0xd5, 0x3b, 0x38, 0x39, 0xec, 0xa8, 0x15, 0x54, 0x87, 0x8a, 0x80, 0x3a, 0x66,
-	0xdf, 0x54, 0xab, 0xc2, 0x5a, 0xeb, 0x67, 0x6b, 0xff, 0x6d, 0xdf, 0x52, 0xe1, 0x55, 0x15, 0xca,
-	0xc1, 0xcd, 0xa6, 0xff, 0x00, 0x8d, 0x53, 0xea, 0xd9, 0xe7, 0xd7, 0x98, 0xb2, 0x99, 0xeb, 0x30,
-	0x1a, 0xb8, 0x1e, 0xbc, 0x95, 0x2a, 0xd8, 0x5f, 0x88, 0x47, 0xac, 0x47, 0x09, 0x8b, 0xde, 0xa2,
-	0xc1, 0x4a, 0xdf, 0x83, 0x15, 0x73, 0x36, 0x9b, 0xfc, 0xdf, 0xe3, 0x0f, 0x61, 0xad, 0x1b, 0xb5,
-	0x2b, 0xa6, 0xbf, 0xcf, 0x29, 0xcb, 0xec, 0x34, 0x5d, 0x5e, 0xa6, 0xb2, 0x69, 0x3e, 0xc1, 0x5a,
-	0xae, 0x7a, 0xfd, 0x19, 0xac, 0x46, 0xe7, 0x02, 0x0b, 0x6f, 0xd4, 0x6d, 0xfa, 0x1e, 0xac, 0x1e,
-	0xda, 0xec, 0xb3, 0xbf, 0x28, 0x1e, 0xfd, 0x1e, 0x3d, 0xb7, 0xdf, 0x87, 0x8e, 0xf9, 0x2b, 0xfd,
-	0x11, 0x6c, 0x8a, 0xe3, 0xd1, 0xc5, 0xc5, 0x42, 0x91, 0x75, 0x28, 0x72, 0x77, 0x36, 0x70, 0xa4,
-	0x4a, 0x01, 0x17, 0xb8, 0x3b, 0x3b, 0xd6, 0xbf, 0x85, 0xea, 0xe2, 0x35, 0x9d, 0x7e, 0xa9, 0x6e,
-	0x40, 0x91, 0x71, 0x72, 0x49, 0x83, 0x9b, 0xc4, 0x5f, 0xe8, 0x1d, 0xd8, 0x4a, 0xff, 0x40, 0xe0,
-	0xdf, 0x37, 0x00, 0xd1, 0x9d, 0x1a, 0xce, 0x19, 0x30, 0x22, 0x22, 0x8e, 0xed, 0xea, 0x26, 0x6c,
-	0x74, 0xe9, 0x0d, 0xad, 0x14, 0x86, 0x9c, 0x4d, 0xdc, 0xe1, 0x65, 0x68, 0x88, 0x5c, 0xe8, 0x97,
-	0xb0, 0x99, 0x92, 0x08, 0xec, 0xd8, 0x81, 0x6a, 0xf2, 0x6e, 0x4f, 0x9a, 0xb1, 0xd8, 0x14, 0xcc,
-	0x77, 0x36, 0x77, 0x28, 0x63, 0x94, 0x35, 0x73, 0x4b, 0x06, 0x2f, 0x36, 0xdb, 0xbf, 0x41, 0x3d,
-	0x76, 0xc3, 0x30, 0xf4, 0x10, 0x4a, 0x7e, 0xf9, 0xa2, 0x7a, 0xfc, 0xea, 0xd1, 0x56, 0x8d, 0x54,
-	0x55, 0x6f, 0x43, 0x51, 0xd6, 0x69, 0x8a, 0xd7, 0x30, 0x12, 0xd5, 0xdb, 0xfe, 0x53, 0x81, 0x4a,
-	0x50, 0x8d, 0x0c, 0x7d, 0x05, 0xf9, 0x2e, 0xe5, 0x08, 0x19, 0x4b, 0x25, 0xaa, 0x45, 0xa3, 0x17,
-	0x3d, 0x82, 0x72, 0x50, 0x60, 0x68, 0xd5, 0x48, 0x96, 0xa8, 0xa6, 0x1a, 0xe9, 0xda, 0x7b, 0x0c,
-	0x95, 0xb0, 0xaa, 0x90, 0x6a, 0xa4, 0x0a, 0x6c, 0x99, 0xff, 0x58, 0x69, 0xff, 0x01, 0xb0, 0x88,
-	0x2d, 0x7a, 0x06, 0x05, 0x71, 0x08, 0x6d, 0x19, 0x99, 0xd5, 0xa5, 0xdd, 0x36, 0x3e, 0x52, 0x14,
-	0x4f, 0x7d, 0x5f, 0x36, 0x8d, 0xac, 0x74, 0x6b, 0x5b, 0x46, 0x66, 0x0a, 0x5f, 0x15, 0x7f, 0xcd,
-	0x93, 0x99, 0x7d, 0x56, 0x92, 0xff, 0x60, 0x9e, 0xfc, 0x1b, 0x00, 0x00, 0xff, 0xff, 0x0f, 0x19,
-	0x67, 0xbd, 0x86, 0x0f, 0x00, 0x00,
+	// 1483 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x97, 0xeb, 0x6e, 0xdb, 0xb6,
+	0x17, 0xc0, 0x2b, 0xdf, 0x7d, 0xec, 0x38, 0x0a, 0x73, 0xa9, 0x21, 0xf4, 0x92, 0xea, 0xff, 0xef,
+	0x1a, 0x0c, 0x85, 0x92, 0xba, 0x43, 0xb3, 0x16, 0xeb, 0x00, 0xd5, 0x56, 0xdd, 0x16, 0xb9, 0x00,
+	0xb2, 0xeb, 0x0d, 0xfb, 0x30, 0x8f, 0xb1, 0x19, 0x47, 0x88, 0x2d, 0x79, 0x22, 0x9d, 0x36, 0xd8,
+	0x43, 0xec, 0x25, 0xf6, 0x16, 0xfb, 0xb4, 0xe7, 0xd8, 0xb7, 0x3d, 0xc9, 0x40, 0x8a, 0x94, 0x65,
+	0xd9, 0x5d, 0xb3, 0x7d, 0x13, 0x0f, 0x0f, 0x7f, 0x3e, 0x57, 0x1e, 0x1a, 0x60, 0x10, 0x84, 0xc4,
+	0x9a, 0x86, 0x01, 0x0b, 0x8c, 0xfb, 0xa3, 0x20, 0x18, 0x8d, 0xc9, 0xbe, 0x58, 0x9d, 0xcd, 0xce,
+	0xf7, 0x99, 0x37, 0x21, 0x94, 0xe1, 0xc9, 0x34, 0x52, 0x30, 0x7f, 0xd3, 0xa0, 0xd0, 0xf1, 0x46,
+	0x3e, 0x09, 0x11, 0x82, 0x9c, 0x8f, 0x27, 0xa4, 0xae, 0xed, 0x6a, 0x7b, 0x65, 0x57, 0x7c, 0xa3,
+	0x7d, 0xd8, 0xa4, 0xde, 0xc8, 0xc7, 0x6c, 0x16, 0x92, 0x3e, 0x1e, 0x8f, 0x82, 0xd0, 0x63, 0x17,
+	0x93, 0x7a, 0x46, 0xa8, 0xa0, 0x78, 0xcb, 0x56, 0x3b, 0xe8, 0x21, 0xd4, 0x2e, 0x30, 0xbd, 0x48,
+	0xe8, 0x66, 0x85, 0xee, 0x1a, 0x97, 0xce, 0xd5, 0x76, 0xa0, 0x30, 0x9d, 0x9d, 0x5d, 0x92, 0xeb,
+	0x7a, 0x6e, 0x57, 0xdb, 0xab, 0xba, 0x72, 0xc5, 0xe5, 0x1f, 0x88, 0x37, 0xba, 0x60, 0xf5, 0xfc,
+	0xae, 0xb6, 0x97, 0x73, 0xe5, 0xca, 0xfc, 0x33, 0x03, 0x45, 0x7b, 0x30, 0x08, 0x66, 0x3e, 0x43,
+	0x35, 0xc8, 0x78, 0x43, 0x69, 0x65, 0xc6, 0x1b, 0xa2, 0x5d, 0xa8, 0x0c, 0x09, 0x1d, 0x84, 0xde,
+	0x94, 0x79, 0x81, 0x2f, 0x6d, 0x4b, 0x8a, 0xd0, 0x3e, 0x14, 0xa9, 0xf0, 0x91, 0xd6, 0xb3, 0xbb,
+	0xd9, 0xbd, 0x4a, 0x63, 0xdb, 0x92, 0x30, 0x2b, 0xf2, 0x9d, 0x3a, 0x3e, 0x0b, 0xaf, 0x5d, 0xa5,
+	0x85, 0xee, 0x40, 0x99, 0x5d, 0x84, 0x84, 0x5e, 0x04, 0xe3, 0xa1, 0xb0, 0x30, 0xe7, 0xce, 0x05,
+	0xa8, 0x0e, 0xc5, 0x33, 0x3c, 0xc6, 0xfe, 0x80, 0x48, 0x2b, 0xd5, 0x12, 0x3d, 0x80, 0xaa, 0x47,
+	0xfb, 0x57, 0x78, 0xec, 0x0d, 0x31, 0x0b, 0xc2, 0x7a, 0x61, 0x57, 0xdb, 0x2b, 0xb9, 0x15, 0x8f,
+	0xf6, 0x94, 0x88, 0x47, 0xf9, 0x2a, 0x60, 0xa4, 0x5e, 0x8c, 0xa2, 0xcc, 0xbf, 0xd1, 0x73, 0x80,
+	0x41, 0x48, 0x30, 0x23, 0xc3, 0x3e, 0x66, 0xf5, 0xd2, 0xae, 0xb6, 0x57, 0x69, 0x18, 0x56, 0x94,
+	0x3a, 0x4b, 0xa5, 0xce, 0xea, 0xaa, 0xd4, 0xb9, 0x65, 0xa9, 0x6d, 0x33, 0xa3, 0x09, 0xd5, 0xa4,
+	0x0b, 0x48, 0x87, 0x2c, 0x8f, 0x6a, 0x14, 0x1d, 0xfe, 0x89, 0xee, 0x42, 0xfe, 0x0a, 0x8f, 0x67,
+	0x44, 0x04, 0xa6, 0xd2, 0x28, 0x4a, 0x97, 0xdd, 0x48, 0xfa, 0x22, 0xf3, 0xb5, 0x66, 0xfe, 0xb5,
+	0x01, 0x95, 0x6e, 0x88, 0x7d, 0x8a, 0x07, 0x22, 0x5e, 0xe9, 0x08, 0x3f, 0x84, 0x1c, 0xbb, 0x9e,
+	0x46, 0x84, 0x5a, 0x63, 0xc3, 0x4a, 0xe8, 0x5a, 0xdd, 0xeb, 0x29, 0x71, 0xc5, 0x36, 0xcf, 0x3d,
+	0x0d, 0x66, 0xe1, 0x80, 0xf4, 0x71, 0x14, 0x5d, 0x95, 0xfb, 0x48, 0xaa, 0xf2, 0xb7, 0xe8, 0x6d,
+	0xee, 0x5f, 0x78, 0x8b, 0xbe, 0x01, 0x88, 0x6b, 0x8e, 0xd6, 0xf3, 0x22, 0x97, 0x77, 0x16, 0xcc,
+	0xe9, 0xc4, 0xdb, 0x51, 0x4a, 0x13, 0xfa, 0x3c, 0xf4, 0xe7, 0x84, 0x50, 0x91, 0x95, 0x9c, 0x2b,
+	0xbe, 0x51, 0x0f, 0x76, 0x22, 0xbc, 0xb2, 0xb9, 0x3f, 0x08, 0x7c, 0x46, 0x7c, 0x26, 0x12, 0x54,
+	0x69, 0xdc, 0x5b, 0xa0, 0x37, 0x85, 0xaa, 0x74, 0xa4, 0x85, 0x19, 0x7e, 0x73, 0xcb, 0xdd, 0x1a,
+	0x24, 0x85, 0xcd, 0xe8, 0x34, 0xea, 0xc0, 0xf6, 0x84, 0x84, 0xa3, 0x65, 0x6c, 0x94, 0xdd, 0xbb,
+	0x0b, 0xd8, 0x63, 0xae, 0xb9, 0x48, 0xdd, 0x9c, 0x24, 0x64, 0x0a, 0xfa, 0x02, 0xaa, 0x94, 0xf8,
+	0xc3, 0x98, 0x55, 0x16, 0xac, 0xed, 0xc5, 0x00, 0x10, 0x7f, 0x28, 0x19, 0x15, 0xae, 0xac, 0xce,
+	0xfe, 0x04, 0x06, 0x25, 0x6c, 0x5e, 0x9b, 0xfd, 0xf3, 0x31, 0x1e, 0xc5, 0x24, 0x10, 0xa4, 0x07,
+	0x29, 0x12, 0x8b, 0xcb, 0xf6, 0xf5, 0x18, 0x8f, 0x24, 0xf5, 0x36, 0x4d, 0xc9, 0xd5, 0x2f, 0xf4,
+	0x60, 0x87, 0x57, 0x73, 0xe2, 0x27, 0x14, 0xbd, 0xb2, 0x22, 0x94, 0xbd, 0x80, 0x91, 0x18, 0xa3,
+	0x42, 0x79, 0x95, 0x14, 0x2a, 0xee, 0x3b, 0x40, 0x78, 0x38, 0xec, 0x47, 0xbd, 0x19, 0x33, 0xab,
+	0xb2, 0x6e, 0x92, 0x4c, 0x7b, 0x38, 0x8c, 0x8a, 0x5b, 0xf2, 0x74, 0xac, 0x04, 0x89, 0xb4, 0x84,
+	0x64, 0x12, 0x5c, 0x91, 0x34, 0x6e, 0x6d, 0x45, 0x5a, 0x5c, 0xa1, 0xb9, 0x40, 0xdc, 0x0c, 0x13,
+	0xb2, 0x04, 0x94, 0x87, 0x36, 0xbe, 0x20, 0x62, 0x68, 0x6d, 0x05, 0xb4, 0x43, 0x58, 0x57, 0x29,
+	0x2a, 0x28, 0x4d, 0xc8, 0x14, 0xb4, 0x05, 0x3a, 0x87, 0x0e, 0x31, 0xc3, 0x31, 0x6f, 0x5d, 0xf0,
+	0xea, 0x69, 0x1e, 0xc7, 0x48, 0x54, 0x8d, 0x46, 0x4b, 0x45, 0x69, 0xc2, 0x3a, 0xf9, 0x48, 0x06,
+	0x33, 0x46, 0x62, 0x88, 0xbe, 0x02, 0xe2, 0x44, 0x3a, 0x0a, 0x22, 0x8f, 0x24, 0x20, 0x23, 0xe2,
+	0x13, 0xea, 0xd1, 0x18, 0xb2, 0xb1, 0x02, 0xd2, 0x8e, 0x74, 0x14, 0x44, 0x1e, 0x91, 0x10, 0xe3,
+	0x29, 0x54, 0x12, 0x0a, 0xe8, 0xff, 0x50, 0x92, 0x9d, 0x41, 0xeb, 0x9a, 0xe8, 0xe3, 0x92, 0xba,
+	0x93, 0xdd, 0x78, 0xc7, 0x38, 0x84, 0x8d, 0xa5, 0x96, 0x43, 0x26, 0x14, 0xd5, 0xfd, 0xa2, 0x09,
+	0x33, 0xe6, 0x27, 0xd5, 0x86, 0xf1, 0x1c, 0xf4, 0x74, 0x53, 0xf1, 0xeb, 0x89, 0xe1, 0x70, 0x44,
+	0x58, 0x3f, 0x79, 0xbc, 0xec, 0xae, 0x45, 0x52, 0xa9, 0x6a, 0xb8, 0x50, 0x52, 0x3d, 0x74, 0xc3,
+	0x23, 0xe8, 0x3e, 0x88, 0x56, 0xeb, 0xe3, 0x89, 0xd0, 0xc9, 0x88, 0xfb, 0x05, 0xb8, 0xc8, 0x9e,
+	0x48, 0x73, 0xb6, 0x56, 0x75, 0xd3, 0xd2, 0xbc, 0xd0, 0x96, 0xe6, 0x85, 0xf1, 0x02, 0x36, 0x96,
+	0x5a, 0xe5, 0xa6, 0xae, 0x1c, 0xc0, 0xda, 0x42, 0x4b, 0xa0, 0xfb, 0x50, 0x88, 0xea, 0x5e, 0x46,
+	0x2e, 0x1e, 0x06, 0x52, 0x6c, 0x7c, 0x01, 0x7a, 0xba, 0xea, 0x57, 0xbd, 0x0b, 0x8c, 0x03, 0xd0,
+	0xd3, 0x85, 0xbc, 0x38, 0x34, 0x33, 0xa9, 0xa1, 0xc9, 0xf3, 0x9f, 0x28, 0xd5, 0x15, 0x73, 0x0a,
+	0x41, 0x8e, 0x17, 0xbb, 0x38, 0x59, 0x75, 0xc5, 0xb7, 0xf1, 0x7b, 0x06, 0x2a, 0x89, 0xda, 0xe4,
+	0x93, 0x77, 0xd1, 0x61, 0xb5, 0x54, 0xbc, 0xcc, 0x9c, 0xf7, 0x44, 0x0e, 0xad, 0xac, 0x18, 0x5a,
+	0x77, 0x3f, 0x55, 0xef, 0xc9, 0x01, 0x76, 0x0f, 0x80, 0xf0, 0xa9, 0x31, 0x0d, 0x3c, 0x3f, 0x9a,
+	0x4c, 0x65, 0x37, 0x21, 0x41, 0xcf, 0x20, 0x87, 0xc3, 0x91, 0x1a, 0x3c, 0xe6, 0x27, 0x91, 0x76,
+	0x38, 0x92, 0xe3, 0x47, 0xe8, 0x23, 0x13, 0xaa, 0x83, 0x60, 0x32, 0x25, 0x3e, 0xc5, 0xe2, 0x89,
+	0x12, 0x0d, 0xa0, 0x05, 0x99, 0x71, 0x08, 0xe5, 0xf8, 0xd8, 0x8a, 0xe8, 0x6c, 0x25, 0xa7, 0x78,
+	0x39, 0x39, 0xbc, 0xeb, 0x90, 0xe3, 0x2e, 0xa0, 0x02, 0x64, 0xde, 0x75, 0xf4, 0x5b, 0xa8, 0x04,
+	0xb9, 0xef, 0xec, 0xce, 0xb1, 0xae, 0x19, 0x2f, 0x61, 0x3d, 0x35, 0x0e, 0x3f, 0x07, 0xae, 0x26,
+	0xc1, 0x7f, 0x68, 0x92, 0x5c, 0x81, 0x62, 0xdb, 0x39, 0x71, 0x3a, 0x6f, 0x39, 0x1e, 0x41, 0xad,
+	0xe9, 0x3a, 0x76, 0xd7, 0xe9, 0xdb, 0xcd, 0xe6, 0xe9, 0xfb, 0x93, 0xae, 0xae, 0xa1, 0x0d, 0x58,
+	0x3b, 0x76, 0xdc, 0xf6, 0x5c, 0x94, 0xe1, 0x56, 0x74, 0x9c, 0x93, 0x96, 0x9e, 0x45, 0x3b, 0x80,
+	0x3a, 0x4e, 0xb7, 0xdf, 0xb3, 0x8f, 0xde, 0xb6, 0xec, 0xee, 0xa9, 0xdb, 0x7f, 0x7d, 0x64, 0xb7,
+	0xf5, 0x1c, 0x07, 0xf5, 0x4e, 0xbb, 0xce, 0x7c, 0x43, 0xcf, 0xa3, 0x1a, 0x80, 0xdd, 0x6a, 0xf5,
+	0x3b, 0x6f, 0xdb, 0x27, 0x8e, 0xab, 0x17, 0x38, 0xd8, 0x75, 0x8e, 0x4f, 0x7b, 0x8e, 0x12, 0x15,
+	0xb9, 0x88, 0xe3, 0xba, 0x6f, 0x5c, 0xa7, 0xf3, 0xe6, 0xf4, 0xa8, 0xa5, 0x97, 0x50, 0x15, 0x4a,
+	0x5c, 0xd4, 0xb2, 0xbb, 0xb6, 0x5e, 0xe6, 0xd6, 0x3a, 0xdf, 0x3b, 0xcd, 0xf7, 0x5d, 0x47, 0x87,
+	0x57, 0x65, 0x28, 0xca, 0x2b, 0xcb, 0xfc, 0x16, 0x6a, 0x3d, 0x12, 0x7a, 0xe7, 0xd7, 0x2e, 0xa1,
+	0xd3, 0xc0, 0xa7, 0x44, 0xba, 0x2e, 0x5f, 0x3a, 0x25, 0x37, 0x5a, 0xf0, 0x27, 0x68, 0x48, 0x30,
+	0x8d, 0x5f, 0x92, 0x72, 0x65, 0xbe, 0x84, 0x35, 0x7b, 0x3a, 0x1d, 0xff, 0xd7, 0xe3, 0x8f, 0x60,
+	0xa3, 0x1d, 0x77, 0xa6, 0x4b, 0x7e, 0x9e, 0x11, 0xca, 0x56, 0xb5, 0x96, 0xf9, 0x0c, 0x6a, 0xed,
+	0xa8, 0x51, 0xfe, 0x41, 0x6b, 0xb9, 0xde, 0xcd, 0x43, 0x58, 0x8f, 0xcf, 0x49, 0x0b, 0x6f, 0xd4,
+	0x64, 0xe6, 0x4b, 0x58, 0x3f, 0xf2, 0xe8, 0x67, 0x7f, 0x91, 0x3f, 0xd9, 0x43, 0x72, 0xee, 0x7d,
+	0x54, 0x8e, 0x45, 0x2b, 0xf3, 0x31, 0x6c, 0xf3, 0xe3, 0xf1, 0x05, 0x45, 0x15, 0x64, 0x13, 0xf2,
+	0x2c, 0x98, 0xf6, 0x7d, 0x41, 0xc9, 0xb9, 0x39, 0x16, 0x4c, 0x4f, 0xcc, 0x27, 0x50, 0x9e, 0xbf,
+	0x85, 0xd3, 0xef, 0xcc, 0x2d, 0xc8, 0x53, 0x86, 0x2f, 0x89, 0xbc, 0x3d, 0xa2, 0x85, 0xd9, 0x82,
+	0x9d, 0xf4, 0x0f, 0x48, 0xff, 0xbe, 0x04, 0x88, 0xef, 0x4e, 0x35, 0x46, 0xc0, 0x8a, 0x15, 0xdd,
+	0xc4, 0xae, 0x69, 0xc3, 0x56, 0x9b, 0xdc, 0xd0, 0x4a, 0x6e, 0xc8, 0xd9, 0x38, 0x18, 0x5c, 0x2a,
+	0x43, 0xc4, 0xc2, 0xbc, 0x84, 0xed, 0x14, 0x42, 0xda, 0xb1, 0x07, 0xe5, 0xc5, 0x3b, 0x7c, 0xd1,
+	0x8c, 0xf9, 0x26, 0xd7, 0xfc, 0xe0, 0x31, 0x9f, 0x50, 0x4a, 0x68, 0x3d, 0xb3, 0x64, 0xf0, 0x7c,
+	0xb3, 0xf1, 0x23, 0x54, 0x13, 0xd7, 0x0b, 0x45, 0x8f, 0xa0, 0x10, 0x95, 0x2f, 0xaa, 0x26, 0xef,
+	0x1d, 0x63, 0xdd, 0x4a, 0x55, 0xf5, 0x43, 0xc8, 0x8b, 0x3a, 0x4d, 0xe9, 0xd5, 0xac, 0x85, 0xea,
+	0x6d, 0xfc, 0xaa, 0x41, 0x49, 0x56, 0x23, 0x45, 0xff, 0x83, 0x6c, 0x9b, 0x30, 0x84, 0xac, 0xa5,
+	0x12, 0x35, 0xe2, 0xe1, 0x8a, 0x1e, 0x43, 0x51, 0x16, 0x18, 0x5a, 0xb7, 0x16, 0x4b, 0xd4, 0xd0,
+	0xad, 0x74, 0xed, 0x1d, 0x40, 0x49, 0x55, 0x15, 0xd2, 0xad, 0x54, 0x81, 0x2d, 0xeb, 0x1f, 0x68,
+	0x8d, 0x5f, 0x00, 0xe6, 0xb1, 0x45, 0x87, 0x90, 0xe3, 0x87, 0xd0, 0x8e, 0xb5, 0xb2, 0xba, 0x8c,
+	0xdb, 0xd6, 0x27, 0x8a, 0xe2, 0xab, 0xc8, 0x97, 0x6d, 0x6b, 0x55, 0xba, 0x8d, 0x1d, 0x6b, 0x65,
+	0x0a, 0x5f, 0xe5, 0x7f, 0xc8, 0xe2, 0xa9, 0x77, 0x56, 0x10, 0xff, 0x3f, 0x9e, 0xfe, 0x1d, 0x00,
+	0x00, 0xff, 0xff, 0x26, 0xe2, 0xee, 0x47, 0x44, 0x0f, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
